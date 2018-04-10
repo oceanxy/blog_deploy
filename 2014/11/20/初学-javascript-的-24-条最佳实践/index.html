@@ -1,0 +1,1109 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Neucha:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,效率,入门," />
+
+
+
+
+
+  <link rel="alternate" href="/blog/atom.xml" title="XieYang-blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="注：本文多次用到 Firebug 的 console 对象，请参考 Firebug Console API。关于 Firebug 的更详细介绍，请猛击这里。  使用 “===” 代替 “==”JavaScript 里有两种不同的相等运算符：=== | !== 和 == | != 。相比之下，前者更值得推荐。请尽量使用前者。  “如果两边的操作数具有相同的类型和值，=== 返回true，!== 返">
+<meta name="keywords" content="javascript,效率,入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初学 javascript 的 24 条最佳实践">
+<meta property="og:url" content="http://www.xieyangogo.cn/2014/11/20/初学-javascript-的-24-条最佳实践/index.html">
+<meta property="og:site_name" content="XieYang-blog">
+<meta property="og:description" content="注：本文多次用到 Firebug 的 console 对象，请参考 Firebug Console API。关于 Firebug 的更详细介绍，请猛击这里。  使用 “===” 代替 “==”JavaScript 里有两种不同的相等运算符：=== | !== 和 == | != 。相比之下，前者更值得推荐。请尽量使用前者。  “如果两边的操作数具有相同的类型和值，=== 返回true，!== 返">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.xieyangogo.cn/blog/images/html30/1.png">
+<meta property="og:updated_time" content="2017-10-20T02:38:55.571Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初学 javascript 的 24 条最佳实践">
+<meta name="twitter:description" content="注：本文多次用到 Firebug 的 console 对象，请参考 Firebug Console API。关于 Firebug 的更详细介绍，请猛击这里。  使用 “===” 代替 “==”JavaScript 里有两种不同的相等运算符：=== | !== 和 == | != 。相比之下，前者更值得推荐。请尽量使用前者。  “如果两边的操作数具有相同的类型和值，=== 返回true，!== 返">
+<meta name="twitter:image" content="http://www.xieyangogo.cn/blog/images/html30/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'CBD64E6R0S',
+      apiKey: '2a6f0239ea18967e10d740ceaa4ccbfa',
+      indexName: 'blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索帖子","hits_empty":"未搜索到关于 ${query} 的文章","hits_stats":"在 ${time} ms 内搜索到 ${hits} 条结果"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.xieyangogo.cn/2014/11/20/初学-javascript-的-24-条最佳实践/"/>
+
+
+
+
+
+  <title> 初学 javascript 的 24 条最佳实践 | XieYang-blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bcbac8734f5250621c379fd62b357c26";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/blog/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">XieYang-blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.xieyangogo.cn/blog/2014/11/20/初学-javascript-的-24-条最佳实践/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Oceanxy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/blog/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="XieYang-blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="XieYang-blog" src="/blog/images/avatar.jpg">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                初学 javascript 的 24 条最佳实践
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-20T11:50:00+08:00">
+                2014-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/blog/2014/11/20/初学-javascript-的-24-条最佳实践/" class="leancloud_visitors" data-flag-title="初学 javascript 的 24 条最佳实践">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>注：本文多次用到 Firebug 的 console 对象，请参考 <a href="http://getfirebug.com/console.html" target="_blank" rel="external">Firebug Console API</a>。关于 Firebug 的更详细介绍，请猛击这里。</p>
+</blockquote>
+<h3 id="使用-“-”-代替-“-”"><a href="#使用-“-”-代替-“-”" class="headerlink" title="使用 “===” 代替 “==”"></a>使用 “===” 代替 “==”</h3><p>JavaScript 里有两种不同的相等运算符：=== | !== 和 == | != 。相比之下，前者更值得推荐。请尽量使用前者。</p>
+<blockquote>
+<p>“如果两边的操作数具有相同的类型和值，=== 返回true，!== 返回 false。” —— JavaScript语言精粹</p>
+</blockquote>
+<p>&ensp;<br>不过，如果使用 == 和 != ，在操作不同数据类型时, 你可能会遇到一些意想不到的问题。在进行相等判断前，JavaScript 会试图将它们转换为字符串、数字或 Boolean 量。</p>
+<h3 id="Eval-Bad（避免使用eval函数，参考）"><a href="#Eval-Bad（避免使用eval函数，参考）" class="headerlink" title="Eval = Bad（避免使用eval函数，参考）"></a>Eval = Bad（避免使用eval函数，<a href="http://www.w3school.com.cn/js/jsref_eval.asp" target="_blank" rel="external">参考</a>）</h3><p>起初不太熟悉时，“eval” 让我们能够访问 JavaScript 的编译器（译注：这看起来很强大）。从本质上讲,我们可以将字符串传递给 eval 作为参数，把字符串作为 javascript 代码执行，返回结果。</p>
+<p>这不仅大幅降低脚本的性能（译注：JIT 编译器无法预知字符串内容，而无法预编译和优化），而且这也会带来巨大的安全风险，因为这样付给要执行的文本太高的权限，千万别用！</p>
+<h3 id="省略未必省事"><a href="#省略未必省事" class="headerlink" title="省略未必省事"></a>省略未必省事</h3><p>从技术上讲，你可以省略大多数花括号和分号。大多数浏览器都能正确理解下面的代码:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (someVariableExists)</div><div class="line">    x = <span class="literal">false</span></div></pre></td></tr></table></figure>
+<p>然后，如果像下面这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (someVariableExists)</div><div class="line">    x = <span class="literal">false</span> anotherFunctionCall();</div></pre></td></tr></table></figure>
+<p>有人可能会认为上面的代码等价于下面这样:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (someVariableExists) &#123;</div><div class="line">    x = <span class="literal">false</span>;</div><div class="line">    anotherFunctionCall();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不幸的是，这种理解是错误的。实际上的意思如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (someVariableExists) &#123;</div><div class="line">    x = <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line">anotherFunctionCall();</div></pre></td></tr></table></figure>
+<p>你可能注意到了，上面的缩进容易给人花括号的假象。无可非议，这是一种可怕的实践，应不惜一切代价避免。仅有一种情况下，即只有一行的时候，花括号是可以省略的，但这点也是饱受争议的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="number">2</span> + <span class="number">2</span> === <span class="number">4</span>) <span class="keyword">return</span> <span class="string">'nicely done'</span>;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>建议：</p>
+<p>很可能，有一天你需要在 if 语句块中添加更多的语句。这样的话，你必须重写这段代码。底线——省略是雷区。到底还得加上。</p>
+</blockquote>
+<p>&ensp;</p>
+<h3 id="使用JSLint"><a href="#使用JSLint" class="headerlink" title="使用JSLint"></a>使用JSLint</h3><p><a href="http://www.jslint.com/" target="_blank" rel="external">JSLint</a> 是由大名鼎鼎的<a href="http://www.crockford.com/" target="_blank" rel="external">道格拉斯</a>（Douglas Crockford）编写的调试器。简单的将你的代码粘贴进JSLint中，它会迅速找出代码中明显的问题和错误。</p>
+<blockquote>
+<p>“JSLint扫面输入的源代码。如果发现一个问题，它返回一条描述问题和一个代码中的所在位置的消息。问题并不一定是语法错误，尽管通常是这样。JSLint还会查看一些编码风格和程序结构问题。这并不能保证你的程序是正确的。它只是提供了另一双帮助发现问题的眼睛。” ——JSLing 文档</p>
+</blockquote>
+<p>&ensp;<br>部署脚本之前，运行JSLint，只是为了确保你没有做出任何愚蠢的错误。</p>
+<h3 id="将脚本放在页面的底部"><a href="#将脚本放在页面的底部" class="headerlink" title="将脚本放在页面的底部"></a>将脚本放在页面的底部</h3><p>在本系列前面的文章里已经提到过这个技巧，我粘贴信息在这里。</p>
+<p><img src="/blog/images/html30/1.png" alt=""></p>
+<p>请记住 —— 我们要千方百计保证客户端的页面载入速度尽可能的快。而脚本没载入完成，浏览器就没法加载页面的剩余部分。</p>
+<p>如果你的JS文件只是添加一些额外功能 —— 例如，为点击某链接绑定事件——那大可以等页面加载基本完成后再做。把JS文件放到页面最后，body的结束标签之前，这样做最好了。</p>
+<p>建议</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>And now you know my favorite kinds of corn. <span class="tag">&lt;/<span class="name">p</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"path/to/file.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"path/to/anotherFile.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="避免在For语句内声明变量"><a href="#避免在For语句内声明变量" class="headerlink" title="避免在For语句内声明变量"></a>避免在For语句内声明变量</h3><p>当需要执行冗长的for语句时，不要让JavaScript引擎每次都重复那些没有必要的操作。例如：</p>
+<p>糟糕</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; someArray.length; i++) &#123;</div><div class="line">    <span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>);</div><div class="line">    container.innerHtml += <span class="string">'my number: '</span> + i;</div><div class="line">    <span class="built_in">console</span>.log(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码每次都重新定义数组长度，每次都在遍历DOM寻找container元素 —— 太傻了！</p>
+<p>建议</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = someArray.length; i &lt; len; i++) &#123;</div><div class="line">    container.innerHtml += <span class="string">'my number: '</span> + i;</div><div class="line">    <span class="built_in">console</span>.log(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="构建字符串的最优方法"><a href="#构建字符串的最优方法" class="headerlink" title="构建字符串的最优方法"></a>构建字符串的最优方法</h3><p>当你需要遍历数组或对象的时候，不要总想着 “for” 语句，要有创造性，总能找到更好的办法，例如，像下面这样。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="string">'item 1'</span>, <span class="string">'item 2'</span>, <span class="string">'item 3'</span>, ...];</div><div class="line"><span class="keyword">var</span> list = <span class="string">'&lt;ul&gt;&lt;li&gt;'</span> + arr.join(<span class="string">'&lt;/li&gt;&lt;li&gt;'</span>) + <span class="string">'&lt;/li&gt;&lt;/ul&gt;'</span>;</div></pre></td></tr></table></figure>
+<p><strong>我不是你心中神，但请你相信我（不信你自己测试） —— 这是迄今为止最快的方法！</strong></p>
+<p>使用原生代码（如 join()），不管系统内部做了什么，通常比非原生快很多。 —— James Padolsey, james.padolsey.com</p>
+<h3 id="减少全局变量"><a href="#减少全局变量" class="headerlink" title="减少全局变量"></a>减少全局变量</h3><p>只要把多个全局变量都整理在一个名称空间下，将显著降低与其他应用程序、组件或类库之间产生糟糕的相互影响的可能性。 —— Douglas Crockford</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">'Jeffrey'</span>;</div><div class="line"><span class="keyword">var</span> lastName = <span class="string">'Way'</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;...&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(name); <span class="comment">// Jeffrey -- 或 window.name</span></div></pre></td></tr></table></figure>
+<p>更好的做法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> DudeNameSpace = &#123;</div><div class="line">    name: <span class="string">'Jeffrey'</span>,</div><div class="line">    lastName: <span class="string">'Way'</span>,</div><div class="line">    doSomething: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;...&#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(DudeNameSpace.name); <span class="comment">// Jeffrey</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>注：这里只是简单命名为 “DudeNameSpace”，实际当中要取更合理的名字。</p>
+</blockquote>
+<p>&ensp;</p>
+<h3 id="给代码添加注释"><a href="#给代码添加注释" class="headerlink" title="给代码添加注释"></a>给代码添加注释</h3><p>可能一开始你会觉得并无必要，但相信我，你将来会主动想要尽可能写好代码的注释的。当你几个月后再回看某项目时，结果却发现很难想起当时写某句东西时脑子在想的什么了，是不是很让人沮丧呢？或者，如果有同事要修订你的代码呢？一定，一定要为你代码里的重要部分加上注释。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 循环数组，输出每项名字（译者注：这样的注释似乎有点多余吧）</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = array.length; i &lt; len; i++) &#123;</div><div class="line">    <span class="built_in">console</span>.log(array[i]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="试试渐进增强"><a href="#试试渐进增强" class="headerlink" title="试试渐进增强"></a>试试渐进增强</h3><p>一定要记得为未启用 JavaScript 的情况提供替代方案。大家可能会认为，“大部分我的访客都启用了JavaScript的，我才不用担心”。这样的话，你可就大错特错了！</p>
+<p>你有没有试过看看禁用JavaScript后你那漂亮的滑动器都成啥样了？（你可以下载 <a href="https://addons.mozilla.org/en-US/firefox/addon/60" target="_blank" rel="external">Web Developer ToolBar</a> 轻松完成这项任务。）禁用之后你的网站可能就彻底失去了可用性！经验之谈：开发初期总是按照没有JavaScript来设计你的网站，之后再进行渐进地功能增强，小心翼翼地改变你地布局。</p>
+<h3 id="不要给-“setInterval”-或-“setTimeout”-传递字符串参数"><a href="#不要给-“setInterval”-或-“setTimeout”-传递字符串参数" class="headerlink" title="不要给 “setInterval” 或 “setTimeout” 传递字符串参数"></a>不要给 “setInterval” 或 “setTimeout” 传递字符串参数</h3><p>考虑下面的代码:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setInterval(<span class="string">"document.getElementById('container').innerHTML += 'My new number: ' + i"</span>, <span class="number">3000</span>);</div></pre></td></tr></table></figure>
+<p>不仅执行不高效，而且和 eval 函数有着同样的高风险。千万不要把字串传递给 setInterval 和 setTimeout。恰当的做法是，传递一个函数名：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setInterval(someFunction, <span class="number">3000</span>);</div></pre></td></tr></table></figure>
+<h3 id="不要使用-“with”-语句"><a href="#不要使用-“with”-语句" class="headerlink" title="不要使用 “with” 语句"></a>不要使用 “with” 语句</h3><p>初识之下，“with” 语句似乎还挺好用的，它用于设置代码在特定对象中的作用域。其基本用法是提供深入到对象中处理元素的快速写法。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> (being.person.man.bodyparts) &#123;</div><div class="line">    arms = <span class="literal">true</span>;</div><div class="line">    legs = <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而不是像下面这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">being.person.man.bodyparts.arms = <span class="literal">true</span>;</div><div class="line">being.person.man.bodyparts.legs = <span class="literal">true</span>;</div></pre></td></tr></table></figure>
+<p>不幸的是，测试表明，若你要为对象插入新成员，with的表现非常糟糕，它的执行速度非常缓慢。替代方案是声明一个变量：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = being.person.man.bodyparts;</div><div class="line">o.arms = <span class="literal">true</span>;</div><div class="line">o.legs = <span class="literal">true</span>;</div></pre></td></tr></table></figure>
+<h3 id="使用-代替-new-Ojbect"><a href="#使用-代替-new-Ojbect" class="headerlink" title="使用 {} 代替 new Ojbect()"></a>使用 {} 代替 new Ojbect()</h3><p>在JavaScript有多种方式能新建对象，最传统的方法是 new 语句，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">o.name = <span class="string">'Jeffrey'</span>;</div><div class="line">o.lastName = <span class="string">'Way'</span>;</div><div class="line">o.someFunction = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不过，这一方法读起来却比较糟糕。我强烈建议你采用下面这种在文字样式上更为强健的写法：</p>
+<p>更好的做法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">    name: <span class="string">'Jeffrey'</span>,</div><div class="line">    lastName: <span class="string">'Way'</span>,</div><div class="line">    someFunction: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>注意，如果你只是想创建一个空对象，{} 更好。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;&#125;;</div></pre></td></tr></table></figure>
+<p>“对象字面量使我们能够编写更具特色的代码，而且相对简单的多。不需要直接调用构造函数或维持传递给函数的参数的正确顺序，等” —— dyn-web.com</p>
+<h3 id="使用-代替-new-Array"><a href="#使用-代替-new-Array" class="headerlink" title="使用 [] 代替 new Array()"></a>使用 [] 代替 new Array()</h3><p>这同样适用于创建一个新的数组。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Array</span>();</div><div class="line">a[<span class="number">0</span>] = <span class="string">"Joe"</span>;</div><div class="line">a[<span class="number">1</span>] = <span class="string">'Plumber'</span>;</div></pre></td></tr></table></figure>
+<p>更好的做法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [<span class="string">'Joe'</span>, <span class="string">'Plumber'</span>];</div></pre></td></tr></table></figure>
+<p>“javascript 程序中常见的错误是在需要对象的时候使用数组，而需要数组的时候却使用对象。规则很简单：当属性名是连续的整数时，你应该使用数组。否则，请使用对象” —— Douglas Crockford</p>
+<h3 id="定义多个变量时，省略-var-关键字，用逗号代替"><a href="#定义多个变量时，省略-var-关键字，用逗号代替" class="headerlink" title="定义多个变量时，省略 var 关键字，用逗号代替"></a>定义多个变量时，省略 var 关键字，用逗号代替</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> someItem = <span class="string">'some string'</span>; </div><div class="line"><span class="keyword">var</span> anotherItem = <span class="string">'another string'</span>; </div><div class="line"><span class="keyword">var</span> oneMoreItem = <span class="string">'one more string'</span>;</div></pre></td></tr></table></figure>
+<p>更好的做法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> someItem = <span class="string">'some string'</span>, </div><div class="line">    anotherItem = <span class="string">'another string'</span>, </div><div class="line">    oneMoreItem = <span class="string">'one more string'</span>;</div></pre></td></tr></table></figure>
+<p>…不言自明。我不知道这样做能否提升代码执行速度，但是确实让你的代码干净许多。</p>
+<h3 id="谨记，不要省略分号"><a href="#谨记，不要省略分号" class="headerlink" title="谨记，不要省略分号"></a>谨记，不要省略分号</h3><p>从技术上讲，大多数浏览器允许你省略分号。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> someItem = <span class="string">'some string'</span> <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123; </div><div class="line">    <span class="keyword">return</span> <span class="string">'something'</span> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之前已经说过，这样做会造成潜在的更大、更难以发现的问题：</p>
+<p>更好的做法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> someItem = <span class="string">'some string'</span>; <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123; </div><div class="line">    <span class="keyword">return</span> <span class="string">'something'</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="“For-in”-语句"><a href="#“For-in”-语句" class="headerlink" title="“For in” 语句"></a>“For in” 语句</h3><p>遍历对象时，你可能会发现你还需要获取方法函数。所以遇到这种情况时，请一定记得给你的代码包一层 if 语句，用以过滤信息。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (key <span class="keyword">in</span> object) &#123;</div><div class="line">    <span class="keyword">if</span> (object.hasOwnProperty(key)) &#123;</div><div class="line">        ...</div><div class="line">        then</div><div class="line">        <span class="keyword">do</span> something...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>参考 JavaScript：语言精粹，道格拉斯（Douglas Crockford）。</p>
+</blockquote>
+<p>&ensp;</p>
+<h3 id="使用-Firebug-的-“timer”-功能优化你的代码"><a href="#使用-Firebug-的-“timer”-功能优化你的代码" class="headerlink" title="使用 Firebug 的 “timer” 功能优化你的代码"></a>使用 Firebug 的 “timer” 功能优化你的代码</h3><p>想要轻松地快速了解某项操作的用时吗？使用Firebug的timer功能来记录结果好了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">TimeTracker</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.time(<span class="string">"MyTimer"</span>);</div><div class="line">    <span class="keyword">for</span> (x = <span class="number">5000</span>; x &gt; <span class="number">0</span>; x--) &#123;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.timeEnd(<span class="string">"MyTimer"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="阅读，阅读，反复阅读"><a href="#阅读，阅读，反复阅读" class="headerlink" title="阅读，阅读，反复阅读"></a>阅读，阅读，反复阅读</h3><p>虽然我是 Web 开发博客（就像这个！）的超级粉丝，但吃饭和睡觉前除了看书好像也别无选择~ 在你的床头柜上摆一本 Web 开发的好书吧！下列书单都是我的最爱：</p>
+<p><a href="http://www.packtpub.com/object-oriented-javascript-applications-libraries/book" target="_blank" rel="external">Object-Oriented JavaScript</a>（<a href="http://s.click.taobao.com/t?e=m%3D2%26s%3DRTedFwhY5ykcQipKwQzePOeEDrYVVa64K7Vc7tFgwiFRAdhuF14FMeupzlnrjcvD1aH1Hk3GeOiLbAnOMKhNmUKQIyb6a3ytbepvpTpVkkGwOnkIiEYnhxRRelJrXu3g" target="_blank" rel="external">JavaScript面向对象编程指南</a> <a href="http://ishare.iask.sina.com.cn/f/18963277.html" target="_blank" rel="external">pdf</a>）<br><a href="http://oreilly.com/catalog/9780596517748/" target="_blank" rel="external">JavaScript：The Good Parts</a>（<a href="http://s.click.taobao.com/t?e=m%3D2%26s%3DR57sZUeY%2Bd8cQipKwQzePOeEDrYVVa64K7Vc7tFgwiFRAdhuF14FMTkkQUThmjGRt4hWD5k2kjOLbAnOMKhNmUKQIyb6a3ytQ3ve%2Fl8eVw5iZOsdwOXcw9FIO2YfYLJG" target="_blank" rel="external">JavaScript语言精粹 修订版</a> <a href="http://pan.baidu.com/share/link?shareid=381250&amp;uk=4043705155&amp;fid=1352735570" target="_blank" rel="external">pdf</a>）<br><a href="http://net.tutsplus.com/tutorials/JavaScript-ajax/24-JavaScript-best-practices-for-beginners/www.packtpub.com/learning-jquery-1.3/boo" target="_blank" rel="external">Learning jQuery 1.3</a>（<a href="http://s.click.taobao.com/t?e=m%3D2%26s%3D4OykraCsZmQcQipKwQzePOeEDrYVVa64LKpWJ%2Bin0XJRAdhuF14FMbOLn3WkI14k1aH1Hk3GeOiLbAnOMKhNmUKQIyb6a3ytlvVWKrpGG8BlboWVDkT64ko1h03ocqnd" target="_blank" rel="external">jQuery基础教程 第4版</a> <a href="http://download.csdn.net/detail/wang5yong1fei5/4631965" target="_blank" rel="external">pdf</a>）<br><a href="http://oreilly.com/catalog/9780596527464/" target="_blank" rel="external">Learning JavaScript</a>（<a href="http://s.click.taobao.com/t?e=m%3D2%26s%3DrfLwyl5bYj0cQipKwQzePOeEDrYVVa64K7Vc7tFgwiFRAdhuF14FMXFrLRwCQreut4hWD5k2kjOLbAnOMKhNmUKQIyb6a3ytK49eyT2J3GnLe30VI4uWF7UMVP8sn%2BEI" target="_blank" rel="external">JavaScript学习指南</a> <a href="http://pan.baidu.com/share/link?shareid=180605&amp;uk=839021066&amp;fid=1732362737" target="_blank" rel="external">pdf</a>）</p>
+<p>读了他们……多次。我仍将继续!</p>
+<h3 id="自执行函数"><a href="#自执行函数" class="headerlink" title="自执行函数"></a>自执行函数</h3><p>相比于调用函数，让函数在页面载入或者某一父函数被调用时自动执行，是十分简单方便的做法。你只需要把你的函数包在父辈之内，然后添上一个额外的括号，本质上这括号就触发了你定义的函数（<a href="http://20032334.javaeye.com/blog/288989" target="_blank" rel="external">了解更多</a>）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        name: <span class="string">'jeff'</span>,</div><div class="line">        lastName: <span class="string">'way'</span></div><div class="line">    &#125;;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<h3 id="原生代码永远比库快"><a href="#原生代码永远比库快" class="headerlink" title="原生代码永远比库快"></a>原生代码永远比库快</h3><p>诸如 jQuery 和 Mootools 这样的 JavaScript 库，能为你写代码的过程省下不少时间——尤其是当需要 AJAX 操作时。不过你可得记住，只要你的代码写得恰当，原生 JavaScript 总是会比利用代码库的写法执行得快一些。</p>
+<p>jQuery 的 “each” 方法对于循环操作十分便利，但是使用原生态的for语句总归会快很多。</p>
+<h3 id="Crockford（道格拉斯）的-JSON-Parse"><a href="#Crockford（道格拉斯）的-JSON-Parse" class="headerlink" title="Crockford（道格拉斯）的 JSON.Parse"></a>Crockford（道格拉斯）的 JSON.Parse</h3><p>尽管 JavaScript 2 会内建 JSON 处理器，但写这篇文章之时，我们还是需要自己实现。Douglas Crockford，JSON 的创建者，已经为我们创作出能直接使用的处理器了。<a href="http://www.json.org/" target="_blank" rel="external">查看相关信息</a>。</p>
+<p>导入这段代码，你就能新建 JSON 全局对象，然后处理你的 .json 文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> response = <span class="built_in">JSON</span>.parse(xhr.responseText);</div><div class="line"><span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = response.length; i &lt; len; i++) &#123;</div><div class="line">    container.innerHTML += <span class="string">'&lt;li&gt;'</span> + response[i].name + <span class="string">' : '</span> + response[i].email + <span class="string">'&lt;/li&gt;'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="移除-“language”-属性"><a href="#移除-“language”-属性" class="headerlink" title="移除 “language” 属性"></a>移除 “language” 属性</h3><p>很多年前，language还是每段script标签必备属性：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">language</span>=<span class="string">"javascript"</span>&gt;</span><span class="undefined"> </span></div><div class="line"><span class="undefined">    ... </span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>然而，这个属性早已被弃用，所以请移除（译者注：html5 中已废弃，但如果你喜欢，你仍然可以添加）。</p>
+<blockquote>
+<p>本文为翻译文章，原文为“<a href="http://net.tutsplus.com/tutorials/JavaScript-ajax/24-JavaScript-best-practices-for-beginners/" target="_blank" rel="external">24 JavaScript Best Practices for Beginners</a>”，2009年</p>
+</blockquote>
+<p>关于#20 的补充，下面是译者认为的一些好书，有兴趣的读者可以留言讨论</p>
+<ol>
+<li>javascript模式（和上面JavaScript面向对象编程指南同一作者，这本书更好）</li>
+<li>javascript设计模式</li>
+<li>编写可维护的javascript（尼古拉斯新书）</li>
+<li>高性能javascript（尼古拉斯 已绝版）</li>
+<li>javascript语言精髓与编程实践</li>
+<li>javascript高级程序设计（尼古拉斯）</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/blog/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/blog/tags/效率/" rel="tag"># 效率</a>
+          
+            <a href="/blog/tags/入门/" rel="tag"># 入门</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/blog/images/wechat-reward-img.jpg" alt="Oceanxy WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/blog/images/alipay-reward-img.jpg" alt="Oceanxy Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2014/06/23/jQuery-事件/" rel="next" title="jQuery 事件">
+                <i class="fa fa-chevron-left"></i> jQuery 事件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2014/11/20/初学-HTML-的-30-条最佳实践/" rel="prev" title="初学 HTML 的 30 条最佳实践">
+                初学 HTML 的 30 条最佳实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/blog/images/avatar.jpg"
+               alt="Oceanxy" />
+          <p class="site-author-name" itemprop="name">Oceanxy</p>
+          <p class="site-description motion-element" itemprop="description">你无法拒绝一个热衷于前端各种美好效果的工程师！</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/blog/archives">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/blog/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/blog/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/blog/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/oceanxy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-“-”-代替-“-”"><span class="nav-number">1.</span> <span class="nav-text">使用 “===” 代替 “==”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Eval-Bad（避免使用eval函数，参考）"><span class="nav-number">2.</span> <span class="nav-text">Eval = Bad（避免使用eval函数，参考）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#省略未必省事"><span class="nav-number">3.</span> <span class="nav-text">省略未必省事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用JSLint"><span class="nav-number">4.</span> <span class="nav-text">使用JSLint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将脚本放在页面的底部"><span class="nav-number">5.</span> <span class="nav-text">将脚本放在页面的底部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免在For语句内声明变量"><span class="nav-number">6.</span> <span class="nav-text">避免在For语句内声明变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建字符串的最优方法"><span class="nav-number">7.</span> <span class="nav-text">构建字符串的最优方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#减少全局变量"><span class="nav-number">8.</span> <span class="nav-text">减少全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给代码添加注释"><span class="nav-number">9.</span> <span class="nav-text">给代码添加注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#试试渐进增强"><span class="nav-number">10.</span> <span class="nav-text">试试渐进增强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要给-“setInterval”-或-“setTimeout”-传递字符串参数"><span class="nav-number">11.</span> <span class="nav-text">不要给 “setInterval” 或 “setTimeout” 传递字符串参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要使用-“with”-语句"><span class="nav-number">12.</span> <span class="nav-text">不要使用 “with” 语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-代替-new-Ojbect"><span class="nav-number">13.</span> <span class="nav-text">使用 {} 代替 new Ojbect()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-代替-new-Array"><span class="nav-number">14.</span> <span class="nav-text">使用 [] 代替 new Array()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义多个变量时，省略-var-关键字，用逗号代替"><span class="nav-number">15.</span> <span class="nav-text">定义多个变量时，省略 var 关键字，用逗号代替</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#谨记，不要省略分号"><span class="nav-number">16.</span> <span class="nav-text">谨记，不要省略分号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“For-in”-语句"><span class="nav-number">17.</span> <span class="nav-text">“For in” 语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Firebug-的-“timer”-功能优化你的代码"><span class="nav-number">18.</span> <span class="nav-text">使用 Firebug 的 “timer” 功能优化你的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阅读，阅读，反复阅读"><span class="nav-number">19.</span> <span class="nav-text">阅读，阅读，反复阅读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自执行函数"><span class="nav-number">20.</span> <span class="nav-text">自执行函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原生代码永远比库快"><span class="nav-number">21.</span> <span class="nav-text">原生代码永远比库快</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crockford（道格拉斯）的-JSON-Parse"><span class="nav-number">22.</span> <span class="nav-text">Crockford（道格拉斯）的 JSON.Parse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移除-“language”-属性"><span class="nav-number">23.</span> <span class="nav-text">移除 “language” 属性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oceanxy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+      
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2145602"></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("E191g8F5s3UAfy93l0N7fzev-gzGzoHsz", "r9EqhsYlCKLtGQ5A9UWBUE90");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/blog/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/blog/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/blog/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+</body>
+</html>
