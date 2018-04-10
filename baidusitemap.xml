@@ -26,7 +26,6 @@
 
     
     
-    
   <url>
     <loc>http://www.xieyangogo.cn/blog/2014/11/20/%E5%88%9D%E5%AD%A6-javascript-%E7%9A%84-24-%E6%9D%A1%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</loc>
     <lastmod>2017-10-20T02:38:55.571Z</lastmod>
@@ -59,9 +58,9 @@
         <title>高效 jQuery 的奥秘</title>
         <pubTime>2014-11-20T07:10:00.000Z</pubTime>
         
-        <tag>javascript</tag>
-         
         <tag>jQuery</tag>
+         
+        <tag>javascript</tag>
          
         <tag>效率</tag>
          
@@ -74,6 +73,7 @@
     </data>
     </url>
 
+    
     
     
   <url>
@@ -95,78 +95,6 @@
         <tag>javascript消息队列</tag>
          
         <tag>javascript同步、异步</tag>
-         
-         
-           
-             
-              <breadCrumb title="javascript" url="http://www.xieyangogo.cn/blog/categories/javascript/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.xieyangogo.cn/blog/2017/07/18/D3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2017-10-20T02:38:55.556Z</lastmod>
-    <data>
-        <display>
-        <title>D3学习笔记</title>
-        <pubTime>2017-07-18T03:01:00.000Z</pubTime>
-        
-        <tag>d3</tag>
-         
-        <tag>学习笔记</tag>
-         
-         
-           
-             
-              <breadCrumb title="D3" url="http://www.xieyangogo.cn/blog/categories/D3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.xieyangogo.cn/blog/2014/11/20/%E5%88%9D%E5%AD%A6-HTML-%E7%9A%84-30-%E6%9D%A1%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</loc>
-    <lastmod>2017-10-20T02:38:55.556Z</lastmod>
-    <data>
-        <display>
-        <title>初学 HTML 的 30 条最佳实践</title>
-        <pubTime>2014-11-20T06:41:00.000Z</pubTime>
-        
-        <tag>HTML</tag>
-         
-        <tag>效率</tag>
-         
-        <tag>入门</tag>
-         
-         
-           
-             
-              <breadCrumb title="HTML" url="http://www.xieyangogo.cn/blog/categories/HTML/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.xieyangogo.cn/blog/2014/12/27/javaScript%E5%8A%A8%E7%94%BB%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2017-10-20T02:38:55.556Z</lastmod>
-    <data>
-        <display>
-        <title>javaScript动画基础</title>
-        <pubTime>2014-12-27T07:03:00.000Z</pubTime>
-        
-        <tag>javascript</tag>
-         
-        <tag>动画</tag>
-         
-        <tag>setTimeout</tag>
-         
-        <tag>setInterval</tag>
          
          
            
@@ -203,6 +131,30 @@
 
     
   <url>
+    <loc>http://www.xieyangogo.cn/blog/2014/11/20/%E5%88%9D%E5%AD%A6-HTML-%E7%9A%84-30-%E6%9D%A1%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</loc>
+    <lastmod>2017-10-20T02:38:55.556Z</lastmod>
+    <data>
+        <display>
+        <title>初学 HTML 的 30 条最佳实践</title>
+        <pubTime>2014-11-20T06:41:00.000Z</pubTime>
+        
+        <tag>HTML</tag>
+         
+        <tag>效率</tag>
+         
+        <tag>入门</tag>
+         
+         
+           
+             
+              <breadCrumb title="HTML" url="http://www.xieyangogo.cn/blog/categories/HTML/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.xieyangogo.cn/blog/2014/06/23/jQuery-%E4%BA%8B%E4%BB%B6/</loc>
     <lastmod>2017-10-20T02:38:55.556Z</lastmod>
     <data>
@@ -218,6 +170,54 @@
            
              
               <breadCrumb title="jQuery" url="http://www.xieyangogo.cn/blog/categories/jQuery/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xieyangogo.cn/blog/2014/12/27/javaScript%E5%8A%A8%E7%94%BB%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2017-10-20T02:38:55.556Z</lastmod>
+    <data>
+        <display>
+        <title>javaScript动画基础</title>
+        <pubTime>2014-12-27T07:03:00.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+        <tag>动画</tag>
+         
+        <tag>setTimeout</tag>
+         
+        <tag>setInterval</tag>
+         
+         
+           
+             
+              <breadCrumb title="javascript" url="http://www.xieyangogo.cn/blog/categories/javascript/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xieyangogo.cn/blog/2017/07/18/D3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2017-10-20T02:38:55.556Z</lastmod>
+    <data>
+        <display>
+        <title>D3学习笔记</title>
+        <pubTime>2017-07-18T03:01:00.000Z</pubTime>
+        
+        <tag>d3</tag>
+         
+        <tag>学习笔记</tag>
+         
+         
+           
+             
+              <breadCrumb title="D3" url="http://www.xieyangogo.cn/blog/categories/D3/"/>
           
         </display>
     </data>
