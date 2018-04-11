@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="XieYang-blog">
 <meta property="og:description" content="前提：已经使用 npm 预装好了 Hexo 所需的各种依赖包。查阅 文档 以获取更多信息。如果在使用Hexo时遇到任何问题，您可以在 troubleshooting 中找到答案，或者您可以在 GitHub 上询问。  一、 流程1. 全局安装 hexo 命令库1npm install hexo-cli -g">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-11T03:46:45.589Z">
+<meta property="og:updated_time" content="2018-04-11T03:59:29.040Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo 文章管理">
 <meta name="twitter:description" content="前提：已经使用 npm 预装好了 Hexo 所需的各种依赖包。查阅 文档 以获取更多信息。如果在使用Hexo时遇到任何问题，您可以在 troubleshooting 中找到答案，或者您可以在 GitHub 上询问。  一、 流程1. 全局安装 hexo 命令库1npm install hexo-cli -g">
@@ -371,8 +371,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-04-11T11:46:45+08:00">
-                2018-04-11 11:46:45
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-11T11:59:29+08:00">
+                2018-04-11 11:59:29
               </time>
             
           </span>
@@ -447,7 +447,7 @@
 <h3 id="2-创建一个博客项目（一般只在首次创建，后续操作从第三步开始即可）"><a href="#2-创建一个博客项目（一般只在首次创建，后续操作从第三步开始即可）" class="headerlink" title="2. 创建一个博客项目（一般只在首次创建，后续操作从第三步开始即可）"></a>2. 创建一个博客项目（一般只在首次创建，后续操作从第三步开始即可）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init blog</div></pre></td></tr></table></figure>
 <h3 id="3-进入博客项目"><a href="#3-进入博客项目" class="headerlink" title="3. 进入博客项目"></a>3. 进入博客项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> blog</div></pre></td></tr></table></figure>
 <h3 id="4-新建-amp-编辑文章"><a href="#4-新建-amp-编辑文章" class="headerlink" title="4. 新建&amp;编辑文章"></a>4. 新建&amp;编辑文章</h3><p>命令行中输入以下指令以创建新文章：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"new article"</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;new article&quot;</div></pre></td></tr></table></figure>
 <blockquote>
 <p>详细信息: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 </blockquote>
@@ -456,14 +456,14 @@
 <p>使用三个 “-” 字符包裹着页面的属性，采用 yaml 格式书写</p>
 <p>接着是正文，采用 <a href="http://wowubuntu.com/markdown/index.html" target="_blank" rel="external">markdown</a> 格式书写</p>
 <blockquote>
-<p>注意：如果使用了第三方服务，如 algolia 搜索服务，在新建了页面后，记得在根目录执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo algolia/a</div></pre></td></tr></table></figure></p>
+<p>注意：如果使用了第三方服务，如 algolia 搜索服务，在新建了页面后，记得在根目录执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo algolia/a</div></pre></td></tr></table></figure></p>
 <p>以更新搜索内容</p>
 </blockquote>
-<h3 id="5-生成静态文件"><a href="#5-生成静态文件" class="headerlink" title="5. 生成静态文件"></a>5. 生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate/g</div></pre></td></tr></table></figure>
+<h3 id="5-生成静态文件"><a href="#5-生成静态文件" class="headerlink" title="5. 生成静态文件"></a>5. 生成静态文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate/g</div></pre></td></tr></table></figure>
 <blockquote>
 <p>详细信息: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
 </blockquote>
-<h3 id="6-本地服务预览"><a href="#6-本地服务预览" class="headerlink" title="6. 本地服务预览"></a>6. 本地服务预览</h3><p>命令行中输入以下指令启动本地服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server/s</div></pre></td></tr></table></figure></p>
+<h3 id="6-本地服务预览"><a href="#6-本地服务预览" class="headerlink" title="6. 本地服务预览"></a>6. 本地服务预览</h3><p>命令行中输入以下指令启动本地服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server/s</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>详细信息: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
 </blockquote>
@@ -472,7 +472,7 @@
 <p>注意：在新建、删除或修改文章之后，不需要重新启动服务器，只需刷新一下页面就能预览新的改动</p>
 </blockquote>
 <h3 id="7-发布到服务器上"><a href="#7-发布到服务器上" class="headerlink" title="7. 发布到服务器上"></a>7. 发布到服务器上</h3><p>命令行中输入以下指令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy/d</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy/d</div></pre></td></tr></table></figure>
 <blockquote>
 <p>详细信息: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 <p>前提:必须在站点配置文件 _config.yml 中做以下配置：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">  type:</span> <span class="string">git</span></div><div class="line"><span class="attr">  repository:</span> <span class="string">git@github.com:用户名/仓库名.git</span></div><div class="line"><span class="attr">  branch:</span> <span class="string">master</span></div></pre></td></tr></table></figure></p>
@@ -569,11 +569,11 @@
 </tr>
 </tbody>
 </table>
-<h2 id="七、-草稿"><a href="#七、-草稿" class="headerlink" title="七、 草稿"></a>七、 草稿</h2><p>草稿相当于很多博客都有的 “私密文章” 功能。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new draft <span class="string">"new draft"</span></div></pre></td></tr></table></figure></p>
+<h2 id="七、-草稿"><a href="#七、-草稿" class="headerlink" title="七、 草稿"></a>七、 草稿</h2><p>草稿相当于很多博客都有的 “私密文章” 功能。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new draft <span class="string">"new draft"</span></div></pre></td></tr></table></figure></p>
 <p>会在 source/_drafts 目录下生成一个 new-draft.md 文件。但是这个文件不被显示在页面上，链接也访问不到。也就是说如果你想把某一篇文章移除显示，又不舍得删除，可以把它移动到 _drafts 目录之中。</p>
 <p>如果你希望强行预览草稿，更改配置文件：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">render_drafts:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
-<p>或者，如下方式启动server：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server --drafts</div></pre></td></tr></table></figure></p>
-<p>下面这条命令可以把草稿变成文章，或者页面：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo publish [layout] &lt;filename&gt;</div></pre></td></tr></table></figure></p>
+<p>或者，如下方式启动server：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server --drafts</div></pre></td></tr></table></figure></p>
+<p>下面这条命令可以把草稿变成文章，或者页面：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo publish [layout] &lt;filename&gt;</div></pre></td></tr></table></figure></p>
 
       
     </div>
