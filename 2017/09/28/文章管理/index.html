@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="XieYang-blog">
 <meta property="og:description" content="前提：已经使用 npm 预装好了 Hexo 所需的各种依赖包。查阅 文档 以获取更多信息。如果在使用Hexo时遇到任何问题，您可以在 troubleshooting 中找到答案，或者您可以在 GitHub 上询问。  一、 流程1. 全局安装 hexo 命令库1npm install hexo-cli -g">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-11T03:59:29.040Z">
+<meta property="og:updated_time" content="2018-04-11T08:49:57.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo 文章管理">
 <meta name="twitter:description" content="前提：已经使用 npm 预装好了 Hexo 所需的各种依赖包。查阅 文档 以获取更多信息。如果在使用Hexo时遇到任何问题，您可以在 troubleshooting 中找到答案，或者您可以在 GitHub 上询问。  一、 流程1. 全局安装 hexo 命令库1npm install hexo-cli -g">
@@ -371,8 +371,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-04-11T11:59:29+08:00">
-                2018-04-11 11:59:29
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-11T16:49:57+08:00">
+                2018-04-11 16:49:57
               </time>
             
           </span>
@@ -444,8 +444,8 @@
 </blockquote>
 <h2 id="一、-流程"><a href="#一、-流程" class="headerlink" title="一、 流程"></a>一、 流程</h2><h3 id="1-全局安装-hexo-命令库"><a href="#1-全局安装-hexo-命令库" class="headerlink" title="1. 全局安装 hexo 命令库"></a>1. 全局安装 hexo 命令库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="2-创建一个博客项目（一般只在首次创建，后续操作从第三步开始即可）"><a href="#2-创建一个博客项目（一般只在首次创建，后续操作从第三步开始即可）" class="headerlink" title="2. 创建一个博客项目（一般只在首次创建，后续操作从第三步开始即可）"></a>2. 创建一个博客项目（一般只在首次创建，后续操作从第三步开始即可）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init blog</div></pre></td></tr></table></figure>
-<h3 id="3-进入博客项目"><a href="#3-进入博客项目" class="headerlink" title="3. 进入博客项目"></a>3. 进入博客项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> blog</div></pre></td></tr></table></figure>
+<h3 id="2-创建一个博客项目（一般只在首次创建，后续操作从第三步开始即可）"><a href="#2-创建一个博客项目（一般只在首次创建，后续操作从第三步开始即可）" class="headerlink" title="2. 创建一个博客项目（一般只在首次创建，后续操作从第三步开始即可）"></a>2. 创建一个博客项目（一般只在首次创建，后续操作从第三步开始即可）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init blog</div></pre></td></tr></table></figure>
+<h3 id="3-进入博客项目"><a href="#3-进入博客项目" class="headerlink" title="3. 进入博客项目"></a>3. 进入博客项目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd blog</div></pre></td></tr></table></figure>
 <h3 id="4-新建-amp-编辑文章"><a href="#4-新建-amp-编辑文章" class="headerlink" title="4. 新建&amp;编辑文章"></a>4. 新建&amp;编辑文章</h3><p>命令行中输入以下指令以创建新文章：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;new article&quot;</div></pre></td></tr></table></figure>
 <blockquote>
@@ -569,11 +569,11 @@
 </tr>
 </tbody>
 </table>
-<h2 id="七、-草稿"><a href="#七、-草稿" class="headerlink" title="七、 草稿"></a>七、 草稿</h2><p>草稿相当于很多博客都有的 “私密文章” 功能。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new draft <span class="string">"new draft"</span></div></pre></td></tr></table></figure></p>
+<h2 id="七、-草稿"><a href="#七、-草稿" class="headerlink" title="七、 草稿"></a>七、 草稿</h2><p>草稿相当于很多博客都有的 “私密文章” 功能。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new draft &quot;new draft&quot;</div></pre></td></tr></table></figure></p>
 <p>会在 source/_drafts 目录下生成一个 new-draft.md 文件。但是这个文件不被显示在页面上，链接也访问不到。也就是说如果你想把某一篇文章移除显示，又不舍得删除，可以把它移动到 _drafts 目录之中。</p>
 <p>如果你希望强行预览草稿，更改配置文件：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">render_drafts:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
-<p>或者，如下方式启动server：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server --drafts</div></pre></td></tr></table></figure></p>
-<p>下面这条命令可以把草稿变成文章，或者页面：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo publish [layout] &lt;filename&gt;</div></pre></td></tr></table></figure></p>
+<p>或者，如下方式启动server：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server --drafts</div></pre></td></tr></table></figure></p>
+<p>下面这条命令可以把草稿变成文章，或者页面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo publish [layout] &lt;filename&gt;</div></pre></td></tr></table></figure></p>
 
       
     </div>
