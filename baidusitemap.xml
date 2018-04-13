@@ -101,21 +101,21 @@
     
     
   <url>
-    <loc>http://www.xieyangogo.cn/blog/2014/06/23/jQuery-%E4%BA%8B%E4%BB%B6/</loc>
+    <loc>http://www.xieyangogo.cn/blog/2017/07/18/D3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2017-10-20T02:38:55.556Z</lastmod>
     <data>
         <display>
-        <title>jQuery 事件</title>
-        <pubTime>2014-06-23T05:16:56.000Z</pubTime>
+        <title>D3学习笔记</title>
+        <pubTime>2017-07-18T03:01:00.000Z</pubTime>
         
-        <tag>jQuery</tag>
+        <tag>d3</tag>
          
-        <tag>事件</tag>
+        <tag>学习笔记</tag>
          
          
            
              
-              <breadCrumb title="jQuery" url="http://www.xieyangogo.cn/blog/categories/jQuery/"/>
+              <breadCrumb title="D3" url="http://www.xieyangogo.cn/blog/categories/D3/"/>
           
         </display>
     </data>
@@ -173,6 +173,28 @@
 
     
   <url>
+    <loc>http://www.xieyangogo.cn/blog/2014/06/23/jQuery-%E4%BA%8B%E4%BB%B6/</loc>
+    <lastmod>2017-10-20T02:38:55.556Z</lastmod>
+    <data>
+        <display>
+        <title>jQuery 事件</title>
+        <pubTime>2014-06-23T05:16:56.000Z</pubTime>
+        
+        <tag>jQuery</tag>
+         
+        <tag>事件</tag>
+         
+         
+           
+             
+              <breadCrumb title="jQuery" url="http://www.xieyangogo.cn/blog/categories/jQuery/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.xieyangogo.cn/blog/2014/12/27/javaScript%E5%8A%A8%E7%94%BB%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2017-10-20T02:38:55.556Z</lastmod>
     <data>
@@ -192,30 +214,6 @@
            
              
               <breadCrumb title="javascript" url="http://www.xieyangogo.cn/blog/categories/javascript/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.xieyangogo.cn/blog/2013/08/28/canvas%E7%94%BB%E9%A5%BC%E5%9B%BE/</loc>
-    <lastmod>2017-10-20T02:38:55.556Z</lastmod>
-    <data>
-        <display>
-        <title>canvas画饼图</title>
-        <pubTime>2013-08-28T09:36:44.000Z</pubTime>
-        
-        <tag>HTML5</tag>
-         
-        <tag>canvas</tag>
-         
-        <tag>饼图</tag>
-         
-         
-           
-             
-              <breadCrumb title="html5" url="http://www.xieyangogo.cn/blog/categories/html5/"/>
           
         </display>
     </data>
@@ -253,21 +251,23 @@
 
     
   <url>
-    <loc>http://www.xieyangogo.cn/blog/2017/07/18/D3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://www.xieyangogo.cn/blog/2013/08/28/canvas%E7%94%BB%E9%A5%BC%E5%9B%BE/</loc>
     <lastmod>2017-10-20T02:38:55.556Z</lastmod>
     <data>
         <display>
-        <title>D3学习笔记</title>
-        <pubTime>2017-07-18T03:01:00.000Z</pubTime>
+        <title>canvas画饼图</title>
+        <pubTime>2013-08-28T09:36:44.000Z</pubTime>
         
-        <tag>d3</tag>
+        <tag>HTML5</tag>
          
-        <tag>学习笔记</tag>
+        <tag>canvas</tag>
+         
+        <tag>饼图</tag>
          
          
            
              
-              <breadCrumb title="D3" url="http://www.xieyangogo.cn/blog/categories/D3/"/>
+              <breadCrumb title="html5" url="http://www.xieyangogo.cn/blog/categories/html5/"/>
           
         </display>
     </data>
