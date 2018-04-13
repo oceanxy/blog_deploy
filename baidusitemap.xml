@@ -221,6 +221,30 @@
 
     
   <url>
+    <loc>http://www.xieyangogo.cn/blog/2013/08/28/canvas%E7%94%BB%E9%A5%BC%E5%9B%BE/</loc>
+    <lastmod>2017-10-20T02:38:55.556Z</lastmod>
+    <data>
+        <display>
+        <title>canvas画饼图</title>
+        <pubTime>2013-08-28T09:36:44.000Z</pubTime>
+        
+        <tag>HTML5</tag>
+         
+        <tag>canvas</tag>
+         
+        <tag>饼图</tag>
+         
+         
+           
+             
+              <breadCrumb title="html5" url="http://www.xieyangogo.cn/blog/categories/html5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.xieyangogo.cn/blog/2014/12/23/javascript%E9%9A%BE%E7%82%B9%E5%89%96%E6%9E%90%E4%BA%8C%EF%BC%9Aclosure%EF%BC%88%E9%97%AD%E5%8C%85%EF%BC%89/</loc>
     <lastmod>2017-10-20T02:38:55.556Z</lastmod>
     <data>
@@ -244,30 +268,6 @@
            
              
               <breadCrumb title="javascript" url="http://www.xieyangogo.cn/blog/categories/javascript/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.xieyangogo.cn/blog/2013/08/28/canvas%E7%94%BB%E9%A5%BC%E5%9B%BE/</loc>
-    <lastmod>2017-10-20T02:38:55.556Z</lastmod>
-    <data>
-        <display>
-        <title>canvas画饼图</title>
-        <pubTime>2013-08-28T09:36:44.000Z</pubTime>
-        
-        <tag>HTML5</tag>
-         
-        <tag>canvas</tag>
-         
-        <tag>饼图</tag>
-         
-         
-           
-             
-              <breadCrumb title="html5" url="http://www.xieyangogo.cn/blog/categories/html5/"/>
           
         </display>
     </data>

@@ -1101,9 +1101,6 @@ pre .javascript .function {
 .menu .menu-item a:hover {
   border-bottom-color: #222;
 }
-.menu .menu-item .fa {
-  margin-right: 5px;
-}
 .use-motion .menu-item {
   opacity: 0;
 }
@@ -1908,7 +1905,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #662d0b;
+  background: #a69c78;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3099,7 +3096,8 @@ hr {
   }
   .menu .menu-item a {
     font-weight: bolder;
-    font-size: 15px;
+    font-size: 13px;
+    transition: all 500ms;
     color: #fff;
   }
   .menu .menu-item a:hover {
