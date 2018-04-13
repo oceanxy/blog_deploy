@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.xieyangogo.cn/categories/index.html</loc>
+    
+    <lastmod>2018-04-13T06:45:20.768Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.xieyangogo.cn/2018/04/10/sass%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</loc>
     
     <lastmod>2018-04-11T09:55:35.600Z</lastmod>
@@ -30,13 +37,6 @@
   </url>
   
   <url>
-    <loc>http://www.xieyangogo.cn/categories/index.html</loc>
-    
-    <lastmod>2017-10-20T02:38:55.571Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.xieyangogo.cn/2014/11/20/%E9%AB%98%E6%95%88-jQuery-%E7%9A%84%E5%A5%A5%E7%A7%98/</loc>
     
     <lastmod>2017-10-20T02:38:55.571Z</lastmod>
@@ -51,7 +51,7 @@
   </url>
   
   <url>
-    <loc>http://www.xieyangogo.cn/2014/06/23/jQuery-%E4%BA%8B%E4%BB%B6/</loc>
+    <loc>http://www.xieyangogo.cn/2017/07/18/D3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2017-10-20T02:38:55.556Z</lastmod>
     
@@ -65,7 +65,7 @@
   </url>
   
   <url>
-    <loc>http://www.xieyangogo.cn/2014/12/27/javaScript%E5%8A%A8%E7%94%BB%E5%9F%BA%E7%A1%80/</loc>
+    <loc>http://www.xieyangogo.cn/2014/06/23/jQuery-%E4%BA%8B%E4%BB%B6/</loc>
     
     <lastmod>2017-10-20T02:38:55.556Z</lastmod>
     
@@ -73,6 +73,13 @@
   
   <url>
     <loc>http://www.xieyangogo.cn/2013/08/28/canvas%E7%94%BB%E9%A5%BC%E5%9B%BE/</loc>
+    
+    <lastmod>2017-10-20T02:38:55.556Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xieyangogo.cn/2014/12/27/javaScript%E5%8A%A8%E7%94%BB%E5%9F%BA%E7%A1%80/</loc>
     
     <lastmod>2017-10-20T02:38:55.556Z</lastmod>
     
@@ -87,13 +94,6 @@
   
   <url>
     <loc>http://www.xieyangogo.cn/2014/12/23/javascript%E9%9A%BE%E7%82%B9%E5%89%96%E6%9E%90%E4%BA%8C%EF%BC%9Aclosure%EF%BC%88%E9%97%AD%E5%8C%85%EF%BC%89/</loc>
-    
-    <lastmod>2017-10-20T02:38:55.556Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.xieyangogo.cn/2017/07/18/D3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2017-10-20T02:38:55.556Z</lastmod>
     
