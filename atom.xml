@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://www.xieyangogo.cn/"/>
-  <updated>2018-04-11T09:55:35.600Z</updated>
+  <updated>2018-04-25T04:34:55.821Z</updated>
   <id>http://www.xieyangogo.cn/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>react获取ref的值为undefined</title>
+    <link href="http://www.xieyangogo.cn/2018/04/25/react%E8%8E%B7%E5%8F%96ref%E7%9A%84%E5%80%BC%E4%B8%BAundefined/"/>
+    <id>http://www.xieyangogo.cn/2018/04/25/react获取ref的值为undefined/</id>
+    <published>2018-04-25T04:32:03.000Z</published>
+    <updated>2018-04-25T04:34:55.821Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1、问题描述"><a href="#1、问题描述" class="headerlink" title="1、问题描述"></a>1、问题描述</h3><p>在 render() 里面某个DOM 结点上定义了 ref=’xxx’ 后，在生命周期里面使用 this.refs.xxx 获取 xxx 结点，控制台报错 xxx 结点 undefined。</p><h3 id="2、原因分析"><a href="#2、原因分析" class="headerlink" title="2、原因分析"></a>2、原因分析</h3><p><img src="../images/bVCOam.png" alt=""><br>根据 react 的机制（见上图），render() 方法执行后会进入生命周期 componentDidMount 中，正常情况下在 componentDidMount 中可以使用 this.refs.xxx 获取在 render() 中定义的 ref 属性，但是这里出现了 undefined ，即 this.refs.xxx 的值为 undefined。</p><p>为什么会出现这样的情况呢？<br>在 render() 内，rerutn（DOM结构）之前有一句 return false，导致在 DOM 中定义的 ref=’xxx’ 没被渲染，故而 react 取不到 xxx 的值（主要是在检测数据的合法性方面会导致这个问题）</p><h3 id="3、解决方案"><a href="#3、解决方案" class="headerlink" title="3、解决方案"></a>3、解决方案</h3><p>1、 在 componentDidMount 中取值时检测一下 xxx 结点是否已被定义：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> &#123; keyPersonnelChart &#125; = <span class="keyword">this</span>.refs</div><div class="line"><span class="keyword">if</span> ( xxx !== <span class="literal">undefined</span>) &#123;</div><div class="line"><span class="comment">// do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p>2、不要在 render() 中 return(DOM结构) 之前使用 return false 语句，延伸出 不要在父级检测数据的合法性，直接将这一步放到子组件中进行。例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">    <span class="keyword">if</span> ( !<span class="keyword">this</span>.props.data ) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> (</div><div class="line">    &lt;div ref=<span class="string">'xxx'</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1、问题描述&quot;&gt;&lt;a href=&quot;#1、问题描述&quot; class=&quot;headerlink&quot; title=&quot;1、问题描述&quot;&gt;&lt;/a&gt;1、问题描述&lt;/h3&gt;&lt;p&gt;在 render() 里面某个DOM 结点上定义了 ref=’xxx’ 后，在生命周期里面使用 this.r
+      
+    
+    </summary>
+    
+    
+      <category term="react" scheme="http://www.xieyangogo.cn/tags/react/"/>
+    
+      <category term="ref" scheme="http://www.xieyangogo.cn/tags/ref/"/>
+    
+  </entry>
   
   <entry>
     <title>sass基础入门</title>
