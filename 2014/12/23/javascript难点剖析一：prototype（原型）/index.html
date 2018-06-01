@@ -69,7 +69,7 @@
 
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
-<link href="/blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="javascript,prototype（原型）,javascript原型链,面向对象编程," />
@@ -78,12 +78,12 @@
 
 
 
-  <link rel="alternate" href="/blog/atom.xml" title="XieYang-blog" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="XieYang-blog" type="application/atom+xml" />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
 
 
 
@@ -94,11 +94,11 @@
 <meta name="keywords" content="javascript,prototype（原型）,javascript原型链,面向对象编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javascript难点剖析一：prototype（原型）">
-<meta property="og:url" content="http://www.xieyangogo.cn/2014/12/23/javascript难点剖析一：prototype（原型）/index.html">
+<meta property="og:url" content="http://blog.xieyangogo.cn/2014/12/23/javascript难点剖析一：prototype（原型）/index.html">
 <meta property="og:site_name" content="XieYang-blog">
 <meta property="og:description" content="要理解 javascript 中的 prototype，首先必须弄清楚以下几个概念  javascript 中所有的东西都是对象 javascript 中所有的东西都由 Object 衍生而来, 即所有东西原型链的终点指向 Object.prototype[“constructor”, “toString”, “toLocaleString”, “valueOf”, “hasOwnPropert">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-20T02:38:56.000Z">
+<meta property="og:updated_time" content="2018-06-01T15:20:38.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript难点剖析一：prototype（原型）">
 <meta name="twitter:description" content="要理解 javascript 中的 prototype，首先必须弄清楚以下几个概念  javascript 中所有的东西都是对象 javascript 中所有的东西都由 Object 衍生而来, 即所有东西原型链的终点指向 Object.prototype[“constructor”, “toString”, “toLocaleString”, “valueOf”, “hasOwnPropert">
@@ -108,7 +108,7 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/blog/',
+    root: '/',
     scheme: 'Mist',
     sidebar: {"position":"right","display":"post"},
     fancybox: true,
@@ -129,7 +129,7 @@
 
 
 
-  <link rel="canonical" href="http://www.xieyangogo.cn/2014/12/23/javascript难点剖析一：prototype（原型）/"/>
+  <link rel="canonical" href="http://blog.xieyangogo.cn/2014/12/23/javascript难点剖析一：prototype（原型）/"/>
 
 
 
@@ -174,7 +174,7 @@
   
 
   <div class="custom-logo-site-title">
-    <a href="/blog/"  class="brand" rel="start">
+    <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">XieYang-blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -211,7 +211,7 @@
       
         
         <li class="menu-item menu-item-list">
-          <a href="/blog/" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-list"></i> <br />
             
@@ -221,7 +221,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/blog/categories" rel="section">
+          <a href="/categories" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -231,7 +231,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/blog/archives" rel="section">
+          <a href="/archives" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -241,7 +241,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/blog/tags" rel="section">
+          <a href="/tags" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -251,7 +251,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/blog/about" rel="section">
+          <a href="/about" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -326,12 +326,12 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.xieyangogo.cn/blog/2014/12/23/javascript难点剖析一：prototype（原型）/">
+  <link itemprop="mainEntityOfPage" href="http://blog.xieyangogo.cn/2014/12/23/javascript难点剖析一：prototype（原型）/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Oceanxy">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/blog/images/avatar.jpg">
+    <meta itemprop="image" content="/images/avatar.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -381,8 +381,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-20T10:38:56+08:00">
-                2017-10-20 10:38:56
+              <time title="更新于" itemprop="dateModified" datetime="2018-06-01T23:20:38+08:00">
+                2018-06-01 23:20:38
               </time>
             
           </span>
@@ -400,7 +400,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/javascript/" itemprop="url" rel="index">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
                     <span itemprop="name">javascript</span>
                   </a>
                 </span>
@@ -419,7 +419,7 @@
 
           
           
-             <span id="/blog/2014/12/23/javascript难点剖析一：prototype（原型）/" class="leancloud_visitors" data-flag-title="javascript难点剖析一：prototype（原型）">
+             <span id="/2014/12/23/javascript难点剖析一：prototype（原型）/" class="leancloud_visitors" data-flag-title="javascript难点剖析一：prototype（原型）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -484,13 +484,13 @@
   
         <div class="post-tags">
           
-            <a href="/blog/tags/javascript/" rel="tag"># javascript</a>
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
           
-            <a href="/blog/tags/prototype（原型）/" rel="tag"># prototype（原型）</a>
+            <a href="/tags/prototype（原型）/" rel="tag"># prototype（原型）</a>
           
-            <a href="/blog/tags/javascript原型链/" rel="tag"># javascript原型链</a>
+            <a href="/tags/javascript原型链/" rel="tag"># javascript原型链</a>
           
-            <a href="/blog/tags/面向对象编程/" rel="tag"># 面向对象编程</a>
+            <a href="/tags/面向对象编程/" rel="tag"># 面向对象编程</a>
           
         </div>
       
@@ -531,7 +531,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2014/11/21/CSS-960-grid-入门/" rel="next" title="CSS 960 grid 入门">
+              <a href="/2014/11/21/CSS-960-grid-入门/" rel="next" title="CSS 960 grid 入门">
                 <i class="fa fa-chevron-left"></i> CSS 960 grid 入门
               </a>
             
@@ -541,7 +541,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2014/12/23/javascript难点剖析二：closure（闭包）/" rel="prev" title="javascript难点剖析二：closure（闭包）">
+              <a href="/2014/12/23/javascript难点剖析二：closure（闭包）/" rel="prev" title="javascript难点剖析二：closure（闭包）">
                 javascript难点剖析二：closure（闭包） <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -605,7 +605,7 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/blog/images/avatar.jpg"
+               src="/images/avatar.jpg"
                alt="Oceanxy" />
           <p class="site-author-name" itemprop="name">Oceanxy</p>
           <p class="site-description motion-element" itemprop="description">你无法拒绝一个热衷于前端各种美好效果的工程师！</p>
@@ -614,7 +614,7 @@
         
           
             <div class="site-state-item site-state-posts">
-              <a href="/blog/archives">
+              <a href="/archives">
                 <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
@@ -623,7 +623,7 @@
 
           
             <div class="site-state-item site-state-categories">
-              <a href="/blog/categories">
+              <a href="/categories">
                 <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -632,7 +632,7 @@
 
           
             <div class="site-state-item site-state-tags">
-              <a href="/blog/tags">
+              <a href="/tags">
                 <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -643,7 +643,7 @@
 
         
           <div class="feed-link motion-element">
-            <a href="/blog/atom.xml" rel="alternate">
+            <a href="/atom.xml" rel="alternate">
               <i class="fa fa-rss"></i>
               RSS
             </a>
@@ -724,8 +724,8 @@
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
     NexT.Mist
   </a>
-  <span>| Hosted by <a href="https://pages.coding.me" style="color: gray">Coding Pages</a></span>
 </div>
+<p style="margin-bottom: 0;">Hosted by <a href="https://pages.coding.me" style="font-weight: bold;color: gray;">Coding Pages</a></p>
 
 
 
@@ -801,25 +801,25 @@
   
 
 
-  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
 
-  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
 
 
 
   
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
 
 
-  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
 
 
@@ -1015,14 +1015,14 @@
   
   
   
-  <link rel="stylesheet" href="/blog/lib/algolia-instant-search/instantsearch.min.css">
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
 
   
   
-  <script src="/blog/lib/algolia-instant-search/instantsearch.min.js"></script>
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
   
 
-  <script src="/blog/js/src/algolia-search.js?v=5.1.0"></script>
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
 
 
 
