@@ -1,0 +1,1249 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Neucha:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="react,typescript,apollo-client,Apollo," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XieYang-blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本文档诸多例子来源于官方文档，但也在编写过程中添加了我对这套技术栈的一些理解，如果你更喜欢看官方文档，请移步官网/官方文档  为什么要使用apollo？没有redux繁琐的action、reducer、dispatch……让全局管理store变得简单、直白！ 使用redux管理状态，重心是放在如何去拿数据上；而apollo把重心放在需要什么数据上。理解这一点非常重要！  好了，废话不多说，我们立即">
+<meta name="keywords" content="react,typescript,apollo-client,Apollo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React + GraphQL + apollo-client技术栈简要介绍(基于官方文档v2.5)">
+<meta property="og:url" content="http://blog.xieyangogo.cn/2019/06/12/React-GraphQL-apollo-client技术栈简要介绍-基于官方文档v2-5/index.html">
+<meta property="og:site_name" content="XieYang-blog">
+<meta property="og:description" content="本文档诸多例子来源于官方文档，但也在编写过程中添加了我对这套技术栈的一些理解，如果你更喜欢看官方文档，请移步官网/官方文档  为什么要使用apollo？没有redux繁琐的action、reducer、dispatch……让全局管理store变得简单、直白！ 使用redux管理状态，重心是放在如何去拿数据上；而apollo把重心放在需要什么数据上。理解这一点非常重要！  好了，废话不多说，我们立即">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://blog.xieyangogo.cn/images/React-GraphQL-apollo-client/ROOT_QUERY.png">
+<meta property="og:image" content="http://blog.xieyangogo.cn/images/React-GraphQL-apollo-client/id&typename.png">
+<meta property="og:image" content="http://blog.xieyangogo.cn/images/React-GraphQL-apollo-client/__typename.png">
+<meta property="og:updated_time" content="2019-06-13T06:08:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React + GraphQL + apollo-client技术栈简要介绍(基于官方文档v2.5)">
+<meta name="twitter:description" content="本文档诸多例子来源于官方文档，但也在编写过程中添加了我对这套技术栈的一些理解，如果你更喜欢看官方文档，请移步官网/官方文档  为什么要使用apollo？没有redux繁琐的action、reducer、dispatch……让全局管理store变得简单、直白！ 使用redux管理状态，重心是放在如何去拿数据上；而apollo把重心放在需要什么数据上。理解这一点非常重要！  好了，废话不多说，我们立即">
+<meta name="twitter:image" content="http://blog.xieyangogo.cn/images/React-GraphQL-apollo-client/ROOT_QUERY.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'CBD64E6R0S',
+      apiKey: '2a6f0239ea18967e10d740ceaa4ccbfa',
+      indexName: 'blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索帖子","hits_empty":"未搜索到关于 ${query} 的文章","hits_stats":"在 ${time} ms 内搜索到 ${hits} 条结果"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.xieyangogo.cn/2019/06/12/React-GraphQL-apollo-client技术栈简要介绍-基于官方文档v2-5/"/>
+
+
+
+
+
+  <title> React + GraphQL + apollo-client技术栈简要介绍(基于官方文档v2.5) | XieYang-blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bcbac8734f5250621c379fd62b357c26";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">XieYang-blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="http://www.xieyangogo.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-list">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-list"></i> <br />
+            
+            文章列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.xieyangogo.cn/2019/06/12/React-GraphQL-apollo-client技术栈简要介绍-基于官方文档v2-5/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Oceanxy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="XieYang-blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="XieYang-blog" src="/images/avatar.jpg">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                React + GraphQL + apollo-client技术栈简要介绍(基于官方文档v2.5)
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-12T16:47:17+08:00">
+                2019-06-12 16:47:17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-06-13T14:08:02+08:00">
+                2019-06-13 14:08:02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/06/12/React-GraphQL-apollo-client技术栈简要介绍-基于官方文档v2-5/" class="leancloud_visitors" data-flag-title="React + GraphQL + apollo-client技术栈简要介绍(基于官方文档v2.5)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文档诸多例子来源于官方文档，但也在编写过程中添加了我对这套技术栈的一些理解，如果你更喜欢看官方文档，请移步<a href="https://www.apollographql.com/" target="_blank" rel="noopener">官网</a>/<a href="https://www.apollographql.com/docs/" target="_blank" rel="noopener">官方文档</a></p>
+<blockquote>
+<p>为什么要使用apollo？<br>没有redux繁琐的action、reducer、dispatch……让全局管理store变得简单、直白！</p>
+<p><strong>使用<code>redux</code>管理状态，重心是放在如何去拿数据上；而<code>apollo</code>把重心放在需要什么数据上。理解这一点非常重要！</strong></p>
+</blockquote>
+<p>好了，废话不多说，我们立即开始！</p>
+<a id="more"></a>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="创建React项目"><a href="#创建React项目" class="headerlink" title="创建React项目"></a>创建React项目</h3><ol>
+<li>你可以使用<code>create-react-app</code>快速创建一个React应用，不熟悉<a href="https://facebook.github.io/create-react-app/" target="_blank" rel="noopener">create-react-app</a>的小伙伴可以先行了解。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">npm i create-react-app -g</span><br><span class="line"></span><br><span class="line">create-react-app react-apollo-client-demo --typescript</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> react-apollo-client-demo</span><br><span class="line"></span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>也可以在<a href="https://codesandbox.io/" target="_blank" rel="noopener">codesandbox</a>上在线搭建React项目。方便快捷！</li>
+</ol>
+<h3 id="搭建GraphQL服务"><a href="#搭建GraphQL服务" class="headerlink" title="搭建GraphQL服务"></a>搭建GraphQL服务</h3><ol>
+<li>你可以在github上fork <a href="https://github.com/glennreyes/graphpack" target="_blank" rel="noopener">graphpack</a>项目，然后使用<code>github账号</code>登录<code>codesandbox</code>并导入该项目，即可零配置搭建一个在线的GraphQL服务。<br> 本文档在编写时在<code>codesandbox</code>上搭建了一个服务，可供参考：<a href="https://kdvmr.sse.codesandbox.io/" target="_blank" rel="noopener">https://kdvmr.sse.codesandbox.io/</a></li>
+<li>也可以在本地搭建自己的GraphQL服务，因不在本文档讨论范围，所以暂不提供搭建步骤。</li>
+</ol>
+<h3 id="安装需要的包"><a href="#安装需要的包" class="headerlink" title="安装需要的包"></a>安装需要的包</h3><p>既然本文讲的是<code>graphql</code> + <code>react</code> + <code>apollo</code>开发React App，所以需要安装以下包来支撑，以前使用的redux、react-redux等包可以丢到一边了。</p>
+<blockquote>
+<p>PS：在apollo 1.0时代，<code>本地状态管理</code>功能（本文档后面作了介绍）还依赖于redux等相关技术。但现在apollo已经升级到2.0时代，已经完全抛弃了redux的依赖。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install apollo-boost react-apollo graphql --save</span><br></pre></td></tr></table></figure>
+<p>我们来看一下这三个包的作用：</p>
+<ul>
+<li><a href="https://www.apollographql.com/docs/react/essentials/get-started/#whats-included" target="_blank" rel="noopener">apollo-boost</a>：包含设置Apollo Client所需的核心包。如果你需要按自己的意愿定制化项目，可以自行选择安装单独的包：<br>  — <code>apollo-client</code>：apollo客户端包<ul>
+<li><code>apollo-cache-inmemory</code>：官方推荐的缓存包</li>
+<li><code>apollo-link-http</code>：用于获取远程数据的包</li>
+<li><code>apollo-link-error</code>：用于处理错误的包</li>
+<li><code>apollo-link-state</code>：本地状态管理的包（2.5版本已集成到<code>apollo-client</code>）</li>
+</ul>
+</li>
+<li><a href="https://www.apollographql.com/docs/react/api/react-apollo/" target="_blank" rel="noopener">react-apollo</a>：react的图层集成（用react的组件方式来使用apollo）</li>
+<li><a href="https://graphql.cn/" target="_blank" rel="noopener">graphql</a>：解析GraphQL查询</li>
+</ul>
+<h3 id="实例化Apollo客户端"><a href="#实例化Apollo客户端" class="headerlink" title="实例化Apollo客户端"></a>实例化Apollo客户端</h3><p>需要注意一点的是<code>apollo-boost</code>和<code>apollo-client</code>都提供了<code>ApolloClient</code>，但是两者需要的参数有一点差别。具体见各自API：</p>
+<ul>
+<li><code>apollo-boost</code>导出的Apollo Client对象（详细<a href="https://www.apollographql.com/docs/react/essentials/get-started/#configuration-options" target="_blank" rel="noopener">API</a>）：集成官方核心功能的一个大集合对象</li>
+<li><code>apollo-client</code>导出的Apollo Client对象（详细<a href="https://www.apollographql.com/docs/react/api/apollo-client/#apolloclient" target="_blank" rel="noopener">API</a>）：默认为App所在的<code>同一主机</code>上的<code>GraphQL端点</code>，<br>  要自定义<code>uri</code>还需引入<code>apollo-link-http</code>包。如果你使用的是<code>apollo v1.x</code>，可直接从<code>apollo-client</code>包内导出<code>createNetworkInterface</code>方法，用法请见<a href="https://github.com/apollographql/apollo-link/tree/master/packages/apollo-link-http#upgrading-from-apollo-fetch--apollo-client" target="_blank" rel="noopener">1.x迁移至2.x指南</a></li>
+</ul>
+<p>我们看一下使用<code>apollo-boost</code>实例化Apollo客户端：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ApolloClient <span class="keyword">from</span> <span class="string">'apollo-boost'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> client = <span class="keyword">new</span> ApolloClient(&#123;</span><br><span class="line">    <span class="comment">// 如果你实在找不到现成的服务端，可以使用apollo官网提供的：https://48p1r2roz4.sse.codesandbox.io或者本教程的服务：https://kdvmr.sse.codesandbox.io/</span></span><br><span class="line">    uri: <span class="string">'你的GraphQL服务链接'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以及使用<code>apollo-client</code>实例化Apollo客户端：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ApolloClient <span class="keyword">from</span> <span class="string">'apollo-client'</span></span><br><span class="line"><span class="keyword">import</span> &#123; createHttpLink &#125; <span class="keyword">from</span> <span class="string">'apollo-link-http'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> client = <span class="keyword">new</span> ApolloClient(&#123;</span><br><span class="line">  link: createHttpLink(&#123; </span><br><span class="line">    uri: <span class="string">'你的GraphQL服务链接'</span> </span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="编写GraphQL查询语句"><a href="#编写GraphQL查询语句" class="headerlink" title="编写GraphQL查询语句"></a>编写GraphQL查询语句</h3><blockquote>
+<p>如果对<code>GraphQL</code>语法不是很了解，请先移步<a href="https://juejin.im/post/5b5545a0e51d4518e3119933" target="_blank" rel="noopener">graphQL基础实践</a></p>
+</blockquote>
+<p>为了演示GraphQL查询，我们暂且使用普通的请求看一段代码：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; gql &#125; <span class="keyword">from</span> <span class="string">'apollo-boost'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化 Apollo 客户端</span></span><br><span class="line"></span><br><span class="line">client.query(&#123;</span><br><span class="line">  query: gql<span class="string">`</span></span><br><span class="line"><span class="string">    &#123;</span></span><br><span class="line"><span class="string">      rates(currency: "CNY") &#123;</span></span><br><span class="line"><span class="string">        currency</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">result</span> =&gt;</span> <span class="built_in">console</span>.log(result));</span><br></pre></td></tr></table></figure>
+<p>除了从<code>apollo-boost</code>导入<code>gql</code>，你还可以从<code>graphql-tag</code>这个包导入：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"></span><br><span class="line">gql<span class="string">`...`</span></span><br></pre></td></tr></table></figure>
+<p>显而易见，gql()的作用是把查询字符串解析成查询文档。</p>
+<h3 id="连接Apollo客户端到React"><a href="#连接Apollo客户端到React" class="headerlink" title="连接Apollo客户端到React"></a>连接Apollo客户端到React</h3><figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123; ApolloProvider &#125; <span class="keyword">from</span> <span class="string">'react-apollo'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App: React = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;ApolloProvider client=&#123;client&#125;&gt;</span><br><span class="line">      &lt;div&gt;App content&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>ApolloProvider&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ApolloProvider（详细<a href="https://www.apollographql.com/docs/react/api/react-apollo/#apolloprovider" target="_blank" rel="noopener">API</a>）有一个必需参数<code>client</code>。</p>
+</blockquote>
+<p>和redux一样（redux使用<code>&lt;Provider/&gt;</code>组件包裹React App），react-apollo需要<code>&lt;ApolloProvider /&gt;</code>组件来包裹整个React App，以便将实例化的<code>client</code>放到上下文中，就可以在组件树的任何位置访问到它。<br>另外，还可以使用<code>withApollo</code>来包裹组件，以在组件内部获取到<code>client实例</code>（还有很多获取实例的方法，文档后面有介绍），<br>详情请参考<a href="https://www.apollographql.com/docs/react/api/react-apollo/#withapollocomponent" target="_blank" rel="noopener">withApollo()</a>。</p>
+<h2 id="Query组件与Mutation组件"><a href="#Query组件与Mutation组件" class="headerlink" title="Query组件与Mutation组件"></a>Query组件与Mutation组件</h2><p>在graphql中，<code>query</code>操作代表<code>查询</code>，mutation操作代表增、删和改，他们对应<code>REST API</code>的GET与POST请求，但要注意在实际的请求过程中Query或许并不是<code>GET</code>请求，这里只是为了方便大家理解做的假设！</p>
+<h3 id="获取数据——Query组件"><a href="#获取数据——Query组件" class="headerlink" title="获取数据——Query组件"></a>获取数据——<a href="https://www.apollographql.com/docs/react/essentials/queries/" target="_blank" rel="noopener">Query组件</a></h3><figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Query &#125; <span class="keyword">from</span> <span class="string">"react-apollo"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; gql &#125; <span class="keyword">from</span> <span class="string">"apollo-boost"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ExchangeRates = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;Query</span><br><span class="line">    query=&#123;gql<span class="string">`</span></span><br><span class="line"><span class="string">      &#123;</span></span><br><span class="line"><span class="string">        rates(currency: "USD") &#123;</span></span><br><span class="line"><span class="string">          currency</span></span><br><span class="line"><span class="string">          rate</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    `</span>&#125;</span><br><span class="line">  &gt;</span><br><span class="line">    &#123;</span><br><span class="line">      (&#123; loading, error, data &#125;) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (loading) <span class="keyword">return</span> &lt;p&gt;Loading...&lt;<span class="regexp">/p&gt;;</span></span><br><span class="line"><span class="regexp">        if (error) return &lt;p&gt;Error :(&lt;/</span>p&gt;;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> data.rates.map(<span class="function">(<span class="params">&#123; currency, rate &#125;</span>) =&gt;</span> (</span><br><span class="line">          &lt;div key=&#123;currency&#125;&gt;</span><br><span class="line">            &lt;p&gt;&#123;currency&#125;: &#123;rate&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>div&gt;</span><br><span class="line">        ));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;<span class="regexp">/Query&gt;</span></span><br><span class="line"><span class="regexp">);</span></span><br></pre></td></tr></table></figure>
+<p>恭喜，你刚刚创建了第一个React Query组件！🎉🎉🎉</p>
+<p>代码解析：</p>
+<p>可以看到，在Query组件内，有一个<code>匿名函数</code>，这个匿名函数有一些参数，最常用的有：<code>loading</code>，<code>error</code>，<code>data</code>。<br>它们分别代表组件的加载状态、组件的加载错误提示、以及组件加载到的数据。</p>
+<blockquote>
+<p>Query组件是从<code>react-apollo</code>导出的<code>React组件</code>，它使用<code>render prop</code>模式与UI共享GraphQL数据。（即我们可以从组件的props获取到GraphQL查询返回的数据）<br>Query组件还有很多其他props，上面就展示了一个query属性，其他的如：</p>
+<ul>
+<li><code>children</code>(根据查询结果显示要渲染的UI)</li>
+<li><code>variables</code>（用来传递查询参数到gql()）</li>
+<li><code>skip</code>（跳过这个查询，比如登录时，验证失败，我们使用skip跳过这个查询，则登录失败）</li>
+</ul>
+<p>更多props详见<a href="https://www.apollographql.com/docs/react/essentials/queries/#query-api-overview" target="_blank" rel="noopener">Query API</a></p>
+</blockquote>
+<h3 id="更新数据——Mutation组件"><a href="#更新数据——Mutation组件" class="headerlink" title="更新数据——Mutation组件"></a>更新数据——<a href="https://www.apollographql.com/docs/react/essentials/mutations/" target="_blank" rel="noopener">Mutation组件</a></h3><p>更新数据包括新增、修改和删除，这些操作统一使用Mutation组件。<br>Mutation组件和Query组件一样，使用<code>render prop</code>模式，但props有差别，<a href="https://www.apollographql.com/docs/react/essentials/mutations/#mutation-api-overview" target="_blank" rel="noopener">Mutation API</a></p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Mutation &#125; <span class="keyword">from</span> <span class="string">"react-apollo"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ADD_TODO = gql<span class="string">`</span></span><br><span class="line"><span class="string">  mutation AddTodo($type: String!) &#123;</span></span><br><span class="line"><span class="string">    addTodo(type: $type) &#123;</span></span><br><span class="line"><span class="string">      id</span></span><br><span class="line"><span class="string">      type</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> AddTodo = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> input;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Mutation mutation=&#123;ADD_TODO&#125;&gt;</span><br><span class="line">      &#123;</span><br><span class="line">        (addTodo, &#123; data &#125;) =&gt; (</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;form</span><br><span class="line">              onSubmit=&#123;<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">                e.preventDefault();</span><br><span class="line">                addTodo(&#123; variables: &#123; <span class="keyword">type</span>: input.value &#125; &#125;);</span><br><span class="line">                input.value = <span class="string">""</span>;</span><br><span class="line">              &#125;&#125;</span><br><span class="line">            &gt;</span><br><span class="line">              &lt;input</span><br><span class="line">                ref=&#123;<span class="function"><span class="params">node</span> =&gt;</span> &#123;</span><br><span class="line">                  input = node;</span><br><span class="line">                &#125;&#125;</span><br><span class="line">              /&gt;</span><br><span class="line">              &lt;button <span class="keyword">type</span>=<span class="string">"submit"</span>&gt;Add Todo&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>form&gt;</span><br><span class="line">          &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>Mutation&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>我们来梳理一下代码：</p>
+<ul>
+<li>首先，创建用于<code>mutation</code>（突变）的GraphQL，mutation需要一个字符串类型的参数<code>type</code>。它将用于mutation的GraphQL语句包装在<code>gql</code>方法中，并将其传递给<code>Mutation组件</code>的<code>props</code>。</li>
+<li><code>Mutation组件</code>内需要一个<code>匿名函数</code>作为<code>子函数</code>（也称为render prop函数），同Query组件，但参数有差异。</li>
+<li><code>render prop函数</code>的第一个参数是<code>Mutation组件</code>内部定义的<code>mutate()</code>函数。为了提高代码可读性，这里取名为<code>addTodo</code>。<br>  也可以直接用<code>“mutate”</code>表示mutate函数，通过调用它来告诉<code>Apollo Client</code>，接下来要触发mutation（即触发提交表单的POST请求，在onSubmit事件里面可以看见addTodo函数被调用了）。</li>
+<li><code>render prop函数</code>的第二个参数是一个对象，这个对象有多个属性，包括data（mutation的结果，POST请求的返回值）、loading（加载状态）和error（加载过程中的错误信息），同<code>Query组件</code>。</li>
+</ul>
+<blockquote>
+<p><code>mutate函数</code>（也就是上面命名的<code>addTodo</code>函数）可选地接受变量，如：</p>
+<ul>
+<li>optimisticResponse</li>
+<li>refetchQueries和update（这些函数就是后面用来更新缓存的）</li>
+<li>ignoreResults：忽略mutation操作返回的结果（即忽略POST请求的返回值）</li>
+</ul>
+<p>你也可以将这些值作为<code>props</code>传递给<code>Mutation组件</code>。详细的介绍请移步<a href="https://www.apollographql.com/docs/react/api/react-apollo/#graphql-options-for-mutations" target="_blank" rel="noopener">mutate函数 API</a></p>
+</blockquote>
+<p>到这里，我们能发出客户端请求，也能得到服务器返回的结果，那接下来就着手怎么处理这些数据，然后渲染到UI上。我们看一下<code>redux</code>在这一步是怎么处理的：</p>
+<ul>
+<li>dispatch触发数据请求</li>
+<li>reducer根据之前定义的action处理得到的新数据，把数据保存到store中</li>
+<li>react-redux的connect连接store与React组件</li>
+<li>mapStateToProps/mapDisToProps完成render prop。</li>
+</ul>
+<p>以上步骤，全靠一行一行的代码手动实现，我们再来看一下apollo是怎么处理的：</p>
+<ul>
+<li>cache.writeQuery()</li>
+</ul>
+<p>没错，你没看错，就是这一个API，搞定以上<code>redux</code>需要一大堆代码才能完成的数据更新！writeQuery相当于通过一种方式来告诉Apollo Client：<br><code>我们已经成功发出POST请求并得到了返回的结果了，现在把结果给你，你更新一下本地的缓存吧！</code><br>并且如果你的数据写得很规范（呃，其实它叫<code>范式化</code>，不要急，后面有介绍），甚至连这一句话都不用写，当你执行query或mutation后，UI便会自动根据新的数据更新UI！！</p>
+<h3 id="更新缓存——mutation后内部自动query"><a href="#更新缓存——mutation后内部自动query" class="headerlink" title="更新缓存——mutation后内部自动query"></a>更新缓存——mutation后内部自动query</h3><p>有时，当执行mutation时，GraphQL服务器和Apollo缓存会变得不同步。当执行的更新取决于本地缓存中已有的数据时，会发生这种情况。例如，本地缓存了一张列表，<br>当删除列表中的一项或添加一项新的数据，当我们执行mutation后，graphql服务端和本地缓存不一致，我们需要一种方法来告诉Apollo Client去更新项目列表的查询，<br>以获取我们mutation后新的项目列表数据；又或者我们仅仅使用mutation提交一张表单，本地并没有缓存这张表单的数据，所以我们并不需要新的查询来更新本地缓存。</p>
+<p>下面来看一段代码：</p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Mutation &#125; <span class="keyword">from</span> <span class="string">"react-apollo"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ADD_TODO = gql<span class="string">`</span></span><br><span class="line"><span class="string">  mutation AddTodo($type: String!) &#123;</span></span><br><span class="line"><span class="string">    addTodo(type: $type) &#123;</span></span><br><span class="line"><span class="string">      id</span></span><br><span class="line"><span class="string">      type</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> GET_TODOS = gql<span class="string">`</span></span><br><span class="line"><span class="string">  query GetTodos &#123;</span></span><br><span class="line"><span class="string">    todos</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> AddTodo = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> input;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Mutation</span><br><span class="line">      mutation=&#123;ADD_TODO&#125;</span><br><span class="line">      update=&#123;<span class="function">(<span class="params">cache, &#123; data: &#123; addTodo &#125; &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; todos &#125; = cache.readQuery(&#123; query: GET_TODOS &#125;);</span><br><span class="line">        cache.writeQuery(&#123;</span><br><span class="line">          query: GET_TODOS,</span><br><span class="line">          data: &#123; todos: todos.concat([addTodo]) &#125;,</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;&#125;</span><br><span class="line">    &gt;</span><br><span class="line">      &#123;<span class="function"><span class="params">addTodo</span> =&gt;</span> (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;form</span><br><span class="line">            onSubmit=&#123;<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">              e.preventDefault();</span><br><span class="line">              addTodo(&#123; variables: &#123; <span class="keyword">type</span>: input.value &#125; &#125;);</span><br><span class="line">              input.value = <span class="string">""</span>;</span><br><span class="line">            &#125;&#125;</span><br><span class="line">          &gt;</span><br><span class="line">            &lt;input</span><br><span class="line">              ref=&#123;<span class="function"><span class="params">node</span> =&gt;</span> &#123;</span><br><span class="line">                input = node;</span><br><span class="line">              &#125;&#125;</span><br><span class="line">            /&gt;</span><br><span class="line">            &lt;button <span class="keyword">type</span>=<span class="string">"submit"</span>&gt;Add Todo&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>form&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      )&#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>Mutation&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>通过这段代码可以看见，<code>update()</code>函数可以作为props传递给Mutation组件，但它也可以作为prop传递给mutate函数，即：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 借用上面的mutate（重命名为addTodo）函数来举例</span></span><br><span class="line">addTodo(&#123;</span><br><span class="line">  variables: &#123; <span class="keyword">type</span>: input.value &#125;,</span><br><span class="line">  update: <span class="function">(<span class="params">cache, data: &#123; addTodo &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong><code>update</code>: (cache: DataProxy, mutationResult: FetchResult)</strong>：用于在发生突变（mutation）后更新缓存</p>
+<p>参数：</p>
+<ul>
+<li><code>cache</code>，这个参数详细讲又可以讲几节课，所以这里只简单介绍一下，详细<a href="https://www.apollographql.com/docs/react/advanced/caching/#inmemorycache" target="_blank" rel="noopener">API</a><ul>
+<li>cache通常是<code>InMemoryCache</code>的一个实例，在创建Apollo Client时提供给Apollo Client的构造函数（怎么创建的Apollo Client？请返回<a href="#创建一个apollo客户端">创建一个apollo客户端</a>复习一下）</li>
+<li><code>InMemoryCache</code>来自于一个单独的包<code>apollo-cache-inmemory</code>。如果你使用<code>apollo-boost</code>，这个包已经被包含在里面了，无需重复安装。</li>
+<li>cache有几个实用函数，例如<code>cache.readQuery</code>和<code>cache.writeQuery</code>，它们允许您使用GraphQL读取和写入缓存。</li>
+<li>另外还有其他的方法，例如<code>cache.readFragment</code>，<code>cache.writeFragment</code>和<code>cache.writeData</code>，详细<a href="(https://www.apollographql.com/docs/react/advanced/caching/#inmemorycache">API</a>)。</li>
+</ul>
+</li>
+<li><code>mutationResult</code>，一个对象，对象里面的data属性保存着执行mutation后的结果（POST请求后得到的数据），详细<a href="https://www.apollographql.com/docs/react/essentials/mutations/#render-prop-function" target="_blank" rel="noopener">API</a><ul>
+<li>如果指定<a href="https://www.apollographql.com/docs/react/features/optimistic-ui/" target="_blank" rel="noopener">乐观响应</a>，则会更新两次<code>update</code>函数：一次是乐观结果，另一次是实际结果。</li>
+<li>您可以使用您的变异结果来使用<code>cache.writeQuery</code>更新缓存。</li>
+</ul>
+</li>
+</ul>
+<p>对于<code>update函数</code>，当你在其内部调用<code>cache.writeQuery</code>时，更新操作会触发Apollo内部的<code>广播查询</code>（broadcastQueries），而广播查询又会触发缓存中与本次mutation相关的数据的自动更新——自动使用受影响组件的GraphQL进行查询并更新UI。<br>因此当执行mutation后，我们不必手动去执行相关组件的查询，Apollo Client在内部已经做好了所有工作，这区别于redux在dispatch后所做的一切处理数据的工作。</p>
+<p>有时，update函数不需要为所有mutation更新缓存（比如提交了一张表单）。所以，Apollo提供单独的<code>cache.writeQuery</code>方法，来触发相关缓存的查询，以更新本地缓存。<br>所以需要注意：<code>仅仅只在update函数内部调用cache.writeQuery()才会触发广播行为</code>。在其他任何地方，cache.writeQuery只会写入缓存，并且所做的更改不会广播到视图层。<br>为了避免给代码造成混淆，推荐在未使用update函数时，使用Apollo Client实例对象<code>client</code>的<code>client.writeQuery</code>方法将数据写入缓存。</p>
+</blockquote>
+<p>解析代码：</p>
+<p>由于我们需要更新显示TODOS列表的查询，因此首先使用<code>cache.readQuery</code>从缓存中读取数据。<br>然后，我们将mutation后得到的新todo与现有todo列表合并起来，并使用<code>cache.writeQuery</code>将查询到的数据写回缓存。<br>既然我们已经指定了一个<code>update函数</code>，那么一旦新的todo从服务器返回，我们的用户界面就会用它进行响应性更新（广播给其他与此缓存数据有关的组件的GraphQL查询，让他们及时更新更新相关缓存到UI上）。</p>
+<blockquote>
+<p>Apollo还提供一种的方法来及时地修改本地缓存以快速渲染UI并触发相关缓存的查询，待查询返回新的数据后再真正更新本地缓存，详见<a href="https://www.apollographql.com/docs/react/features/optimistic-ui/" target="_blank" rel="noopener">乐观更新</a>。</p>
+<p>基于<code>乐观UI</code>，如果您运行相同的查询两次，则不会看到加载指示符（Apollo Client返回的loading字段）。apollo会检测当前的请求参数是否变化，然后判断是否向服务器发送新的请求。</p>
+</blockquote>
+<h3 id="Apollo范式化缓存-API"><a href="#Apollo范式化缓存-API" class="headerlink" title="Apollo范式化缓存 API"></a>Apollo范式化缓存 <a href="https://www.apollographql.com/docs/react/advanced/caching/#normalization" target="_blank" rel="noopener">API</a></h3><figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Mutation, Query &#125; <span class="keyword">from</span> <span class="string">"react-apollo"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> UPDATE_TODO = gql<span class="string">`</span></span><br><span class="line"><span class="string">  mutation UpdateTodo($id: String!, $type: String!) &#123;</span></span><br><span class="line"><span class="string">    updateTodo(id: $id, type: $type) &#123;</span></span><br><span class="line"><span class="string">      id</span></span><br><span class="line"><span class="string">      type</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意：这里通过graphql得到的todos数据是一个包含id和type字段的对象的数组，与 UPDATE_TODO 里面的字段（主要是id）对应</span></span><br><span class="line"><span class="keyword">const</span> GET_TODOS = gql<span class="string">`</span></span><br><span class="line"><span class="string">  query GetTodos &#123;</span></span><br><span class="line"><span class="string">    todos</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Todos = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;Query query=&#123;GET_TODOS&#125;&gt;</span><br><span class="line">    &#123;<span class="function">(<span class="params">&#123; loading, error, data &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (loading) <span class="keyword">return</span> &lt;p&gt;Loading...&lt;<span class="regexp">/p&gt;;</span></span><br><span class="line"><span class="regexp">      if (error) return &lt;p&gt;Error :(&lt;/</span>p&gt;;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> data.todos.map(<span class="function">(<span class="params">&#123; id, <span class="keyword">type</span> &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> input;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">          &lt;Mutation mutation=&#123;UPDATE_TODO&#125; key=&#123;id&#125;&gt;</span><br><span class="line">            &#123;<span class="function"><span class="params">updateTodo</span> =&gt;</span> (</span><br><span class="line">              &lt;div&gt;</span><br><span class="line">                &lt;p&gt;&#123;<span class="keyword">type</span>&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">                &lt;form</span></span><br><span class="line"><span class="regexp">                  onSubmit=&#123;e =&gt; &#123;</span></span><br><span class="line"><span class="regexp">                    e.preventDefault();</span></span><br><span class="line"><span class="regexp">                    updateTodo(&#123; variables: &#123; id, type: input.value &#125; &#125;);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">                    input.value = "";</span></span><br><span class="line"><span class="regexp">                  &#125;&#125;</span></span><br><span class="line"><span class="regexp">                &gt;</span></span><br><span class="line"><span class="regexp">                  &lt;input</span></span><br><span class="line"><span class="regexp">                    ref=&#123;node =&gt; &#123;</span></span><br><span class="line"><span class="regexp">                      input = node;</span></span><br><span class="line"><span class="regexp">                    &#125;&#125;</span></span><br><span class="line"><span class="regexp">                  /</span>&gt;</span><br><span class="line">                  &lt;button <span class="keyword">type</span>=<span class="string">"submit"</span>&gt;Update Todo&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>form&gt;</span><br><span class="line">              &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">            )&#125;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>Mutation&gt;</span><br><span class="line">        );</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;&#125;</span><br><span class="line">  &lt;<span class="regexp">/Query&gt;</span></span><br><span class="line"><span class="regexp">);</span></span><br></pre></td></tr></table></figure>
+<p>注意：这一次在<code>mutate函数</code>（这里命名为<code>updateTodo</code>）里并没有调用update函数，在也没有传递update函数给Mutation组件，但是UI会立即更新。这就是范式化缓存的魅力了。</p>
+<blockquote>
+<p><code>范式化缓存</code>——<code>InMemoryCache</code>在将数据保存到存储之前对数据进行范式化，方法是将结果拆分为单个对象，为每个对象创建唯一标识符，并将这些对象存储在展平的数据结构中（创建的唯一标识符为这些对象的键，成为缓存键）。<br>默认情况下，<code>InMemoryCache</code>将尝试使用常见的<code>id</code>和<code>_id的主键</code>作为唯一标识符（如果它们与对象上的<code>__typename</code>字段一起存在）。</p>
+<p><img src="/images/React-GraphQL-apollo-client/ROOT_QUERY.png" alt=""></p>
+<p><img src="/images/React-GraphQL-apollo-client/id&amp;typename.png" alt=""></p>
+<p>如果未指定<code>id</code>和<code>_id</code>，或者未指定<code>__typename</code>，则<code>InMemoryCache</code>将按照查询到对象的层级关系依次回退到根查询为止。</p>
+<p><img src="/images/React-GraphQL-apollo-client/__typename.png" alt=""></p>
+<p>例如<code>ROOT_QUERY.allPeople.0</code>将作为数据中<code>allPeople[0]</code>对象的缓存键（cache key）被存储到缓存的根查询（ROOT_QUERY）下。（在展平的数据结构中，所有对象都在<code>ROOT_QUERY</code>下）：</p>
+<p><code>即使我们不打算在我们的UI中使用mutation返回的结果，我们仍然需要返回更新的ID和属性</code>，以便我们的UI进行自动更新。</p>
+</blockquote>
+<p>以上代码中，我们不需要指定<code>update函数</code>，因为TODOS查询将使用缓存中更新的TODO数据自动重建查询结果。</p>
+<blockquote>
+<p>结合上一节介绍的<code>update函数</code>那样——并非每次mutation都需要使用update函数——其原因就是依据Apollo Cache的范式化数据结构，<br>在尽量减少手动操作数据的情况下自动更新UI，当前后端都规范化数据后（特别是唯一标识符<code>id</code>的统一, <code>__typename</code>字段的定义），<br>在<code>query</code>或<code>mutation</code>操作后，我们几乎不用手动处理数据，就能实现UI的自动更新。</p>
+<p>例如：如果只需要更新缓存里面的单条数据，只需要返回这条数据的ID和要更新的属性即可，这种情况下通常不需要使用update函数。</p>
+</blockquote>
+<p>如果想要自定义唯一标识符，即不用默认的<code>ID</code>来生成缓存键，可以使用<code>InMemoryCache</code>构造函数的<code>dataIdFromObject</code>函数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cache = <span class="keyword">new</span> InMemoryCache(&#123;</span><br><span class="line">  dataIdFromObject: <span class="function"><span class="params">object</span> =&gt;</span> object.key || <span class="literal">null</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在指定自定义dataIdFromObject时，Apollo Client不会将类型名称添加到缓存键，因此，如果您的<code>ID</code>在所有对象中不唯一，则可能需要在<code>dataIdFromObject</code>中包含<code>__typename</code>。</p>
+<p>在谷歌浏览器中安装<a href="https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm" target="_blank" rel="noopener">apollo devtools</a>扩展(需要科学上网)，可以清晰看到这种范式化缓存的存储状态。</p>
+<h2 id="中场休息"><a href="#中场休息" class="headerlink" title="中场休息"></a>中场休息</h2><p><strong>使用<code>redux</code>管理状态，重心是放在如何去拿数据上；而<code>apollo</code>把重心放在需要什么数据上。理解这一点非常重要！</strong></p>
+<p>还记得这句话吗？我们在本文档开篇的时候介绍过。现在理解了吗？现在，我们回过头来梳理一下自己学到的知识点：</p>
+<ul>
+<li>当学习了怎样去获取数据（query）以及更新数据和修改数据（mutation）后，原来Apollo和React结合，原来组件可以这么简单的与数据交互！</li>
+<li>当学习了Apollo缓存后，我们对Apollo数据存储的理解又上升了一个台阶，把所有查询回来的对象一一拆分，通过唯一标识符的形式把一个深层级的对象展平，直观展现在缓存的根查询中。</li>
+<li>当学习了Apollo的范式化缓存后，我们才知道，原来自动更新UI可以如此优雅！我们甚至不需要管理数据，只需按照规范传递数据即可！</li>
+</ul>
+<h2 id="本地状态管理-详情"><a href="#本地状态管理-详情" class="headerlink" title="本地状态管理 详情"></a>本地状态管理 <a href="https://www.apollographql.com/docs/react/essentials/local-state/" target="_blank" rel="noopener">详情</a></h2><p>上半场我们接触了<code>本地与服务端</code>的远程数据交互，接下来，我们将进入<code>本地的状态管理</code>。</p>
+<p>Apollo Client在<code>2.5版本</code>具有内置的本地状态处理功能，允许将本地数据与远程数据一起存储在Apollo缓存中。要访问本地数据，只需使用<code>GraphQL查询</code>即可。</p>
+<p>而在<code>2.5版本之前</code>，如果想要使用本地状态管理，必须引入已经废弃的一个包<code>apollo-link-state</code>(<a href="https://www.apollographql.com/docs/link/links/state/#quick-start" target="_blank" rel="noopener">API</a>)，<br>这个包在2.5版本已被废弃，因为从2.5版本开始，这个包的功能已经集成到apollo的核心之中，不再额外维护一个单独的包。而在apollo的<code>1.x版本</code>，如果要实现本地状态管理，依然得引入redux。</p>
+<p>Apollo Client有两种主要方法可以执行局部状态突变：</p>
+<ul>
+<li>第一种方法是通过调用<code>cache.writeData</code>直接写入缓存。<br>  在<a href="#更新缓存——mutation后内部自动query">更新缓存</a>那一节，我们已经详细介绍过<code>cache.writeData</code>的用法，以及其余<code>update函数</code>的搭配使用。</li>
+<li>第二种方法是创建一个带有GraphQL突变（mutation）的Mutation组件，该组件调用本地客户端解析器（resolvers）。<br>  如果mutation依赖于缓存中的现有值，我们建议使用解析器（resolvers，后面两节将介绍，目前只需知道它的存在，它和<code>apollo-server</code>端的resolver完全相同）。</li>
+</ul>
+<h3 id="直接写入缓存"><a href="#直接写入缓存" class="headerlink" title="直接写入缓存"></a>直接写入缓存</h3><figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ApolloConsumer &#125; <span class="keyword">from</span> <span class="string">'react-apollo'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Link <span class="keyword">from</span> <span class="string">'./Link'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> FilterLink = <span class="function">(<span class="params">&#123; filter, children &#125;</span>) =&gt;</span> (</span><br><span class="line">  &lt;ApolloConsumer&gt;</span><br><span class="line">    &#123;<span class="function"><span class="params">client</span> =&gt;</span> (</span><br><span class="line">      &lt;Link</span><br><span class="line">        onClick=&#123;<span class="function"><span class="params">()</span> =&gt;</span> client.writeData(&#123; data: &#123; visibilityFilter: filter &#125; &#125;)&#125;</span><br><span class="line">      &gt;</span><br><span class="line">        &#123;children&#125;</span><br><span class="line">      &lt;<span class="regexp">/Link&gt;</span></span><br><span class="line"><span class="regexp">    )&#125;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>ApolloConsumer&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Apollo在<code>ApolloConsumer组件</code>(<a href="https://www.apollographql.com/docs/react/api/react-apollo/#apolloconsumer" target="_blank" rel="noopener">API</a>)或<code>Query组件</code>的render prop中注入了Apollo Client实例，<br>所以当使用这些组件时，我们可以直接从组件的<code>props</code>中拿到<code>client实例</code>。</p>
+</blockquote>
+<p>直接写入缓存不需要GraphQL<code>mutate</code>函数或<code>resolvers</code>函数。因此我们在上面的代码中没有使用它们，我们直接在<code>onClick</code>事件函数里面调用<code>client.writeData</code>来写入缓存。</p>
+<p>但是只建议将<code>直接写入缓存</code>用于简单写入，例如写入字符串或一次性写入。<br>重要的是要注意直接写入并不是作为<code>GraphQL突变</code>实现的，因此不应将它们包含在复杂的开发模式之中。<br>它也不会验证你写入缓存的数据是否为有效GraphQL数据的结构。<br>如果以上提到的任何一点对您很重要，则应选择使用本地<code>resolvers</code>。</p>
+<h3 id="client-指令"><a href="#client-指令" class="headerlink" title="@client 指令"></a>@client 指令</h3><p>上一节提到过，<code>Query组件</code>的render prop同样包含client实例。所以配合<code>@client</code>指令，我们可以在<code>Query组件</code>中轻松地从<code>cache</code>或<code>resolvers</code>获取本地状态。<br>或许换个方式介绍大家能理解得更透彻：配合<code>@client</code>指令，我们可以在<code>Query组件</code>中轻松地从<code>cache</code>获取本地状态，或者通过<code>resolvers</code>从<code>cache</code>获取本地状态。</p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Query &#125; <span class="keyword">from</span> <span class="string">'react-apollo'</span>;</span><br><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Link <span class="keyword">from</span> <span class="string">'./Link'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> GET_VISIBILITY_FILTER = gql<span class="string">`</span></span><br><span class="line"><span class="string">  &#123;</span></span><br><span class="line"><span class="string">    visibilityFilter @client</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> FilterLink = <span class="function">(<span class="params">&#123; filter, children &#125;</span>) =&gt;</span> (</span><br><span class="line">  &lt;Query query=&#123;GET_VISIBILITY_FILTER&#125;&gt;</span><br><span class="line">    &#123;<span class="function">(<span class="params">&#123; data, client &#125;</span>) =&gt;</span> (</span><br><span class="line">      &lt;Link</span><br><span class="line">        onClick=&#123;<span class="function"><span class="params">()</span> =&gt;</span> client.writeData(&#123; data: &#123; visibilityFilter: filter &#125; &#125;)&#125;</span><br><span class="line">        active=&#123;data.visibilityFilter === filter&#125;</span><br><span class="line">      &gt;</span><br><span class="line">        &#123;children&#125;</span><br><span class="line">      &lt;<span class="regexp">/Link&gt;</span></span><br><span class="line"><span class="regexp">    )&#125;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>Query&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>代码解读：</p>
+<p><code>@client</code>指令告诉Apollo Client在本地获取数据（cache或resolvers），而不是将其发送到graphql服务器。<br>在调用<code>client.writeData</code>后，<code>render prop函数</code>上的查询结果将自动更新。同时所有缓存的写入和读取都是同步的，所以不必担心加载状态（loading）。</p>
+<h3 id="本地解析器——resolvers"><a href="#本地解析器——resolvers" class="headerlink" title="本地解析器——resolvers"></a>本地解析器——<a href="https://www.apollographql.com/docs/react/essentials/local-state/#local-resolvers" target="_blank" rel="noopener">resolvers</a></h3><p>终于见到了你——resolvers！前面几节都一笔带过了<code>resolvers</code>（解析器），现在，我们来了解它到底有什么强大的功能。</p>
+<p>如果要依赖本地状态实现<code>GraphQL的突变</code>，我们只需要在本地resolvers对象中<code>指定一个与之对应的函数</code>即可。<br>在Apollo Client的实例化中，<code>resolvers</code>映射为一个<code>对象</code>，这个对象中保存着每一个用于本地突变的<code>resolver函数</code>。<br>当在GraphQL的字段上找到<code>@client</code>指令时，Apollo Client会在<code>resolvers对象</code>中寻找与之对应的<code>resolver函数</code>，这个对应关系是通过<code>resolvers的键</code>来关联的。</p>
+<blockquote>
+<p>即：当执行没有加<code>@client</code>指令的查询或突变时，<code>GraphQL</code>文档中的字段已预定义在了服务端，所以我们只需在查询或突变时按照服务端定义的字段编写<code>GraphQL</code>文档即可；<br>当加上@<code>client</code>指令后，Apollo Client不会向服务端发送请求，转而在自己内部寻找GraphQL文档内指定的字段。但是，我们怎么去访问本地的这些字段呢？或许他们根本就不存在。<br>(关于<code>@client</code>的运作方式，请参考官方文档中关于——<a href="https://www.apollographql.com/docs/react/essentials/local-state/#local-data-query-flow" target="_blank" rel="noopener">本地数据查询流程</a>的部分，由于篇幅原因，本文档不再详细介绍。)<br>这时，我们就需要自己定义可以访问这些字段的方式——resolver，在解析器对象（resolvers）中定义一个解析函数（resolver），以供GraphQL查询或突变在使用了<code>@client</code>指令时调用，<br>这样就建立了GraphQL查询或突变与Apollo Client之间的联系，通过这个函数可以解析有<code>@client</code>指令控制的查询或突变，因此这个函数被命名为解析函数，意指从本地解析函数中寻找GraphQL文档中指定的字段的值。</p>
+</blockquote>
+<p>那解析函数定义在哪里呢？</p>
+<p>其实它在ApolloClient的构造函数中，也就是说我们实例化Apollo Client时，需要传递resolvers给它。</p>
+<blockquote>
+<p>解析器，它和<code>client-server</code>的resolver函数完全相同：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;   fieldName: <span class="function">(<span class="params">obj, args, context, info</span>) =&gt;</span> result;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><code>obj {object}</code>: 包含父字段上resolver函数返回的结果的对象，或者为DOM树最顶层的查询或突变的<code>ROOT_QUERY</code>对象<br><code>args {object}</code>: 包含传递到GraphQL文档中的所有参数的对象。例如，如果使用<code>updateNetworkStatus（isConnected：true）</code>触发查询或突变，则<code>args</code>为<code>{isConnected：true}</code>。<br><code>context {object}</code>: React组件与Apollo Client网络堆栈之间共享的上下文信息的对象。除了可能存在的任何自定义context属性外，本地resolvers始终会收到以下内容：</p>
+<ul>
+<li><code>context.client</code>: Apollo Client的实例</li>
+<li><code>context.cache</code>: Apollo Cache的实例<br>  context.cache.readQuery, .writeQuery, .readFragment, .writeFragment, and .writeData: 一系列用于操作cache的<a href="https://www.apollographql.com/docs/react/essentials/local-state/#managing-the-cache" target="_blank" rel="noopener">API</a></li>
+<li><code>context.getCacheKey</code>: 使用<code>__typename</code>和<code>id</code>从cache中获取<code>key</code>。<br><code>info {object}</code>: 有关查询执行状态的信息。实际中，你可能永远也不会使用到这个参数。</li>
+</ul>
+</blockquote>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ApolloClient &#125; <span class="keyword">from</span> <span class="string">'apollo-client'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; InMemoryCache &#125; <span class="keyword">from</span> <span class="string">'apollo-cache-inmemory'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> client = <span class="keyword">new</span> ApolloClient(&#123;</span><br><span class="line">  cache: <span class="keyword">new</span> InMemoryCache(),</span><br><span class="line">  resolvers: &#123;</span><br><span class="line">    Mutation: &#123;</span><br><span class="line">      toggleTodo: <span class="function">(<span class="params">_root, variables, &#123; cache, getCacheKey &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> id = getCacheKey(&#123; __typename: <span class="string">'TodoItem'</span>, id: variables.id &#125;)</span><br><span class="line">        <span class="keyword">const</span> fragment = gql<span class="string">`</span></span><br><span class="line"><span class="string">          fragment completeTodo on TodoItem &#123;</span></span><br><span class="line"><span class="string">            completed</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">        `</span>;</span><br><span class="line">        <span class="keyword">const</span> todo = cache.readFragment(&#123; fragment, id &#125;);</span><br><span class="line">        <span class="keyword">const</span> data = &#123; ...todo, completed: !todo.completed &#125;;</span><br><span class="line">        cache.writeData(&#123; id, data &#125;);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>代码解析：</p>
+<p>为了切换todo的状态，首先需要查询缓存以找出todo当前状态的内容，然后通过使用<code>cache.readFragment</code>从缓存中读取片段来实现此目的。<br>此函数采用<code>fragment和id</code>，它对应于<code>item</code>的缓存键（<code>cache key</code>）。我们通过调用<code>context</code>中的<code>getCacheKey</code>并传入项目的<code>__typename</code>和<code>id</code>来获取缓存键。</p>
+<p>一旦读取了fragment，就可以切换todo的已完成状态并将更新的数据写回缓存。由于我们不打算在UI中使用mutation的返回结果，因此我们返回<code>null</code>，因为默认情况下所有GraphQL类型都可以为空。</p>
+<p>下面，我们来看一下怎么调用这个toggleTodo解析函数（触发toggleTodo突变）：</p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Mutation &#125; <span class="keyword">from</span> <span class="string">'react-apollo'</span>;</span><br><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> TOGGLE_TODO = gql<span class="string">`</span></span><br><span class="line"><span class="string">  mutation ToggleTodo($id: Int!) &#123;</span></span><br><span class="line"><span class="string">    toggleTodo(id: $id) @client</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Todo = <span class="function">(<span class="params">&#123; id, completed, text &#125;</span>) =&gt;</span> (</span><br><span class="line">  &lt;Mutation mutation=&#123;TOGGLE_TODO&#125; variables=&#123;&#123; id &#125;&#125;&gt;</span><br><span class="line">    <span class="comment">// 特别注意，此toggleTodo非解析器里面的toggleTodo，这个toggleTodo是我们之前介绍过的mutate函数，这里被更名为‘toggleTodo’而已，不要混淆了</span></span><br><span class="line">    &#123;<span class="function"><span class="params">toggleTodo</span> =&gt;</span> (</span><br><span class="line">      &lt;li</span><br><span class="line">        onClick=&#123;toggleTodo&#125;</span><br><span class="line">        style=&#123;&#123;</span><br><span class="line">          textDecoration: completed ? <span class="string">'line-through'</span> : <span class="string">'none'</span>,</span><br><span class="line">        &#125;&#125;</span><br><span class="line">      &gt;</span><br><span class="line">        &#123;text&#125;</span><br><span class="line">      &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">    )&#125;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>Mutation&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>代码解析：</p>
+<p>首先，我们创建一个GraphQL突变文档，它将我们想要切换的item的id作为唯一的参数。我们通过使用<code>@client</code>指令标记<code>GraphQL</code>的<code>toggleTodo</code>字段来指示这是一个本地突变。<br>这将告诉Apollo Client调用我们本地突变解析器（resolvers）里面的<code>toggleTodo</code>解析函数来解析该字段。然后，我们创建一个<code>Mutation组件</code>，就像我们操作远程突变一样。<br>最后，将GraphQL突变传递给组件，并在<code>render prop函数</code>的UI中触发它。</p>
+<h3 id="查询本地状态"><a href="#查询本地状态" class="headerlink" title="查询本地状态"></a>查询本地状态</h3><p>查询本地数据与查询GraphQL服务器非常相似。唯一的区别是本地查询在字段上添加了<code>@client</code>指令，以指示它们应该从Apollo Client cache或resolvers中解析。</p>
+<p>我们来看一个例子：</p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Query &#125; <span class="keyword">from</span> <span class="string">'react-apollo'</span>;</span><br><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Todo <span class="keyword">from</span> <span class="string">'./Todo'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> GET_TODOS = gql<span class="string">`</span></span><br><span class="line"><span class="string">  &#123;</span></span><br><span class="line"><span class="string">    todos @client &#123;</span></span><br><span class="line"><span class="string">      id</span></span><br><span class="line"><span class="string">      completed</span></span><br><span class="line"><span class="string">      text</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    visibilityFilter @client</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> TodoList = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;Query query=&#123;GET_TODOS&#125;&gt;</span><br><span class="line">    &#123;</span><br><span class="line">      (&#123; data: &#123; todos, visibilityFilter &#125; &#125;) =&gt; (</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">          &#123;</span><br><span class="line">            getVisibleTodos(todos, visibilityFilter).map(<span class="function"><span class="params">todo</span> =&gt;</span> (</span><br><span class="line">              &lt;Todo key=&#123;todo.id&#125; &#123;...todo&#125; /&gt;</span><br><span class="line">            ))</span><br><span class="line">          &#125;</span><br><span class="line">        &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">      )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>Query&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>代码解析：</p>
+<p>创建GraphQL查询并将<code>@client</code>指令添加到GraphQL文档的todos和visibilityFilter字段。<br>然后，我们将查询传递给<code>Query组件</code>。<code>@client</code>指令让<code>Query组件</code>知道应该从Apollo Client缓存中提取todos和visibilityFilter，或者使用预定义的本地resolver解析。</p>
+<p>由于上面的查询在安装组件后立即运行，如果cache中没有item或者没有定义任何本地resolver，我们该怎么办？</p>
+<p>我们需要在运行查询之前将初始状态写入缓存，以防止错误输出。</p>
+<h3 id="初始化本地状态"><a href="#初始化本地状态" class="headerlink" title="初始化本地状态"></a>初始化本地状态</h3><p>通常，我们需要将初始状态写入缓存，以便在触发mutation之前查询数据的所有组件都不会出错。<br>要实现此目的，可以使用<code>cache.writeData</code>为初始值准备缓存。</p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ApolloClient &#125; <span class="keyword">from</span> <span class="string">'apollo-client'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; InMemoryCache &#125; <span class="keyword">from</span> <span class="string">'apollo-cache-inmemory'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cache = <span class="keyword">new</span> InMemoryCache();</span><br><span class="line"><span class="keyword">const</span> client = <span class="keyword">new</span> ApolloClient(&#123;</span><br><span class="line">  cache,</span><br><span class="line">  resolvers: &#123; <span class="comment">/* ... */</span> &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">cache.writeData(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    todos: [],</span><br><span class="line">    visibilityFilter: <span class="string">'SHOW_ALL'</span>,</span><br><span class="line">    networkStatus: &#123;</span><br><span class="line">      __typename: <span class="string">'NetworkStatus'</span>,</span><br><span class="line">      isConnected: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>注意：Apollo v2.4和v2.5写入初始本地状态的方式不一样，详情参考<a href="https://www.apollographql.com/docs/link/links/state/#defaults" target="_blank" rel="noopener">官方API</a>。</p>
+<h3 id="重置本地状态-缓存"><a href="#重置本地状态-缓存" class="headerlink" title="重置本地状态/缓存"></a>重置本地状态/缓存</h3><figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ApolloClient &#125; <span class="keyword">from</span> <span class="string">'apollo-client'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; InMemoryCache &#125; <span class="keyword">from</span> <span class="string">'apollo-cache-inmemory'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cache = <span class="keyword">new</span> InMemoryCache();</span><br><span class="line"><span class="keyword">const</span> client = <span class="keyword">new</span> ApolloClient(&#123;</span><br><span class="line">  cache,</span><br><span class="line">  resolvers: &#123; <span class="comment">/* ... */</span> &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> data = &#123;</span><br><span class="line">  todos: [],</span><br><span class="line">  visibilityFilter: <span class="string">'SHOW_ALL'</span>,</span><br><span class="line">  networkStatus: &#123;</span><br><span class="line">    __typename: <span class="string">'NetworkStatus'</span>,</span><br><span class="line">    isConnected: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">cache.writeData(&#123; data &#125;);</span><br><span class="line"></span><br><span class="line">client.onResetStore(<span class="function"><span class="params">()</span> =&gt;</span> cache.writeData(&#123; data &#125;));</span><br></pre></td></tr></table></figure>
+<p>使用<code>client.onResetStore</code>方法可以重置缓存。</p>
+<h3 id="同时请求本地状态和远程数据"><a href="#同时请求本地状态和远程数据" class="headerlink" title="同时请求本地状态和远程数据"></a>同时请求本地状态和远程数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mutation ToggleTodo($id: Int!) &#123;</span><br><span class="line">  toggleTodo(id: $id) @client</span><br><span class="line">  getData(id: $id) &#123;</span><br><span class="line">    id,</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>只需在需要从本地查询的字段后面加上<code>@client</code>指令即可。</p>
+<h3 id="使用-client字段作为变量"><a href="#使用-client字段作为变量" class="headerlink" title="使用@client字段作为变量"></a>使用@client字段作为变量</h3><p>在同一个graphql语句中，还可以将从本地查到的状态用于下一个查询，通过<code>@export</code>指令</p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ApolloClient &#125; <span class="keyword">from</span> <span class="string">'apollo-client'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; InMemoryCache &#125; <span class="keyword">from</span> <span class="string">'apollo-cache-inmemory'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HttpLink &#125; <span class="keyword">from</span> <span class="string">'apollo-link-http'</span>;</span><br><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> query = gql<span class="string">`</span></span><br><span class="line"><span class="string">  query currentAuthorPostCount($authorId: Int!) &#123;</span></span><br><span class="line"><span class="string">    currentAuthorId @client @export(as: "authorId")</span></span><br><span class="line"><span class="string">    postCount(authorId: $authorId)</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cache = <span class="keyword">new</span> InMemoryCache();</span><br><span class="line"><span class="keyword">const</span> client = <span class="keyword">new</span> ApolloClient(&#123;</span><br><span class="line">  link: <span class="keyword">new</span> HttpLink(&#123; uri: <span class="string">'http://localhost:4000/graphql'</span> &#125;),</span><br><span class="line">  cache,</span><br><span class="line">  resolvers: &#123;&#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">cache.writeData(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    currentAuthorId: <span class="number">12345</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ... run the query using client.query, the &lt;Query /&gt; component, etc.</span></span><br></pre></td></tr></table></figure>
+<p>在上面的示例中，<code>currentAuthorId</code>首先从缓存加载，然后作为authorId变量（由@export（as：“authorId”）指令指定）传递到后续postCount字段中。<br>@export指令也可用于选择集中的特定字段，如：</p>
+<p><code>@export</code>指令还可以用于选择集中的特定字段</p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ApolloClient &#125; <span class="keyword">from</span> <span class="string">'apollo-client'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; InMemoryCache &#125; <span class="keyword">from</span> <span class="string">'apollo-cache-inmemory'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HttpLink &#125; <span class="keyword">from</span> <span class="string">'apollo-link-http'</span>;</span><br><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> query = gql<span class="string">`</span></span><br><span class="line"><span class="string">  query currentAuthorPostCount($authorId: Int!) &#123;</span></span><br><span class="line"><span class="string">    currentAuthor @client &#123;</span></span><br><span class="line"><span class="string">      name</span></span><br><span class="line"><span class="string">      authorId @export(as: "authorId")</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    postCount(authorId: $authorId)</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cache = <span class="keyword">new</span> InMemoryCache();</span><br><span class="line"><span class="keyword">const</span> client = <span class="keyword">new</span> ApolloClient(&#123;</span><br><span class="line">  link: <span class="keyword">new</span> HttpLink(&#123; uri: <span class="string">'http://localhost:4000/graphql'</span> &#125;),</span><br><span class="line">  cache,</span><br><span class="line">  resolvers: &#123;&#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">cache.writeData(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    currentAuthor: &#123;</span><br><span class="line">      __typename: <span class="string">'Author'</span>,</span><br><span class="line">      name: <span class="string">'John Smith'</span>,</span><br><span class="line">      authorId: <span class="number">12345</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ... run the query using client.query, the &lt;Query /&gt; component, etc.</span></span><br></pre></td></tr></table></figure>
+<p><code>@export</code>指令使用不仅限于远程查询；它还可以用于为其他<code>@client</code>字段或选择集定义变量：(注意以下代码中GraphQL文档的<code>currentAuthorId</code>和<code>postCount</code>字段之后都有<code>@client</code>指令)</p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ApolloClient &#125; <span class="keyword">from</span> <span class="string">'apollo-client'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; InMemoryCache &#125; <span class="keyword">from</span> <span class="string">'apollo-cache-inmemory'</span>;</span><br><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> query = gql<span class="string">`</span></span><br><span class="line"><span class="string">  query currentAuthorPostCount($authorId: Int!) &#123;</span></span><br><span class="line"><span class="string">    currentAuthorId @client @export(as: "authorId")</span></span><br><span class="line"><span class="string">    postCount(authorId: $authorId) @client</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cache = <span class="keyword">new</span> InMemoryCache();</span><br><span class="line"><span class="keyword">const</span> client = <span class="keyword">new</span> ApolloClient(&#123;</span><br><span class="line">  cache,</span><br><span class="line">  resolvers: &#123;</span><br><span class="line">    Query: &#123;</span><br><span class="line">      postCount(_, &#123; authorId &#125;) &#123;</span><br><span class="line">        <span class="keyword">return</span> authorId === <span class="number">12345</span> ? <span class="number">100</span> : <span class="number">0</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">cache.writeData(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    currentAuthorId: <span class="number">12345</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ... run the query using client.query, the &lt;Query /&gt; component, etc.</span></span><br></pre></td></tr></table></figure>
+<h3 id="动态注入resolver"><a href="#动态注入resolver" class="headerlink" title="动态注入resolver"></a>动态注入resolver</h3><p>有时，当我们在APP中使用了代码拆分，如使用<code>react-loadable</code>时，我们并不是很希望所有的resolver都在初始化Apollo客户端的统一写在一起，而是希望单独拆分到各自的模块中，这样在APP编译后，<br>每个模块各自resolver将包含在自己的包中，这样也有助于减少入口文件的大小，使用<code>addResolvers</code> 和 <code>setResolvers</code>即可办到（<a href="https://www.apollographql.com/docs/react/essentials/local-state/#methods" target="_blank" rel="noopener">API</a>），<br>例如以下代码：</p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Loadable <span class="keyword">from</span> <span class="string">'react-loadable'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Loading <span class="keyword">from</span> <span class="string">'./components/Loading'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> Stats = Loadable(&#123;</span><br><span class="line">  loader: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./components/stats/Stats'</span>),</span><br><span class="line">  loading: Loading,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ApolloConsumer, Query &#125; <span class="keyword">from</span> <span class="string">'react-apollo'</span>;</span><br><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> GET_MESSAGE_COUNT = gql<span class="string">`</span></span><br><span class="line"><span class="string">  &#123;</span></span><br><span class="line"><span class="string">    messageCount @client &#123;</span></span><br><span class="line"><span class="string">      total</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> resolvers = &#123;</span><br><span class="line">  Query: &#123;</span><br><span class="line">    messageCount: <span class="function">(<span class="params">_, args, &#123; cache &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// ... calculate and return the number of messages in</span></span><br><span class="line">      <span class="comment">// the cache ...</span></span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        total: <span class="number">123</span>,</span><br><span class="line">        __typename: <span class="string">'MessageCount'</span>,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MessageCount = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;ApolloConsumer&gt;</span><br><span class="line">      &#123;<span class="function">(<span class="params">client</span>) =&gt;</span> &#123;</span><br><span class="line">        client.addResolvers(resolvers);</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">          &lt;Query query=&#123;GET_MESSAGE_COUNT&#125;&gt;</span><br><span class="line">            &#123;<span class="function">(<span class="params">&#123; loading, data: &#123; messageCount &#125; &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">              <span class="keyword">if</span> (loading) <span class="keyword">return</span> <span class="string">'Loading ...'</span>;</span><br><span class="line">              <span class="keyword">return</span> (</span><br><span class="line">                &lt;p&gt;</span><br><span class="line">                  Total <span class="built_in">number</span> of messages: &#123;messageCount.total&#125;</span><br><span class="line">                &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">              );</span></span><br><span class="line"><span class="regexp">            &#125;&#125;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>Query&gt;</span><br><span class="line">        );</span><br><span class="line">      &#125;&#125;</span><br><span class="line">    &lt;<span class="regexp">/ApolloConsumer&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default MessageCount;</span></span><br></pre></td></tr></table></figure>
+<h2 id="脱离React标签的写法"><a href="#脱离React标签的写法" class="headerlink" title="脱离React标签的写法"></a>脱离React标签的写法</h2><p>由于编程习惯的不同，有些人（比如我），并不是很喜欢（或者说成习惯）把<code>逻辑代码</code>和<code>React标签</code>混合写在一起，就如我们从本文档开始一路看来所有的示例代码那样！<br>个人觉得在一个大型的项目中把<code>Query标签</code>、<code>Mutation标签</code>以及其他的各种标签层层嵌套，再加上各种逻辑实现代码，全部挤在React组件中，真的是一件糟糕的事情。<br>虽然官方推崇这种写法（以上绝大部分代码是官方文档的示例），他们给出的理由是这样写更方便，更简单！</p>
+<p>因人而异吧！</p>
+<p>我个人更倾向于把<code>GraphQL和Apollo的逻辑部分</code>与<code>React组件</code>分离开，我们可以使用<code>react-apollo</code>库提供的<code>graphql</code>和<code>compose</code>方法做到分离。<br>当然，在<code>react-apollo</code>这个包中并不止这两个方法，还有其他的方法，请参考<a href="https://www.apollographql.com/docs/react/api/react-apollo/" target="_blank" rel="noopener">React Apollo API</a></p>
+<p>下面展示一段分离开的代码示例：</p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Avatar, Card, Icon &#125; <span class="keyword">from</span> <span class="string">'antd'</span></span><br><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123; useEffect, useRef &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123; compose, graphql &#125; <span class="keyword">from</span> <span class="string">'react-apollo'</span></span><br><span class="line"><span class="keyword">import</span> &#123; QueryState, Typename &#125; <span class="keyword">from</span> <span class="string">'src/config/clientState'</span></span><br><span class="line"><span class="keyword">import</span> &#123; GET_COMPONENTS_LIST, GET_QUERY_STATE &#125; <span class="keyword">from</span> <span class="string">'src/graphql'</span></span><br><span class="line"><span class="keyword">import</span> &#123; getCorrectQueryState &#125; <span class="keyword">from</span> <span class="string">'src/util'</span></span><br><span class="line"><span class="keyword">import</span> Pagination <span class="keyword">from</span> <span class="string">'../pagination'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'./index.scss'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; Meta &#125; = Card</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Type = &#123;</span><br><span class="line">  id: <span class="built_in">number</span>,</span><br><span class="line">  name: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Author = &#123;</span><br><span class="line">  username: <span class="built_in">string</span>,</span><br><span class="line">  email: <span class="built_in">string</span>,</span><br><span class="line">  avatar: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Component = &#123;</span><br><span class="line">  id: <span class="built_in">number</span>,</span><br><span class="line">  name: <span class="built_in">string</span>,</span><br><span class="line">  version: <span class="built_in">string</span>,</span><br><span class="line">  chineseName: <span class="built_in">string</span>,</span><br><span class="line">  description: <span class="built_in">string</span>,</span><br><span class="line">  <span class="keyword">type</span>: Type,</span><br><span class="line">  url: <span class="built_in">string</span>,</span><br><span class="line">  author: Author,</span><br><span class="line">  previewUrl: <span class="built_in">string</span>,</span><br><span class="line">  isOwn: <span class="built_in">boolean</span>,</span><br><span class="line">  isStored: <span class="built_in">boolean</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ListComponent = &#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    components: Component[],</span><br><span class="line">    compCount: <span class="built_in">number</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  componentsCollect: <span class="function">(<span class="params">[id, isCollect]: [<span class="built_in">number</span>, <span class="built_in">boolean</span>]</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">  queryState: QueryState</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ListComponent = <span class="function">(<span class="params">props: ListComponent</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> cardList: React.MutableRefObject&lt;HTMLDivElement | <span class="literal">null</span>&gt; = useRef(<span class="literal">null</span>)</span><br><span class="line">  <span class="keyword">const</span> &#123; data, componentsCollect, queryState &#125; = props</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 加载时组件卡片的动画效果，配合React的ref和key属性使用</span></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(cardList.current) &#123;</span><br><span class="line">      cardList.current.childNodes.forEach(<span class="function">(<span class="params">element: HTMLElement, index: <span class="built_in">number</span></span>) =&gt;</span> &#123;</span><br><span class="line">        setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          element.classList.add(<span class="string">'card-load-anim'</span>)</span><br><span class="line">        &#125;, index * <span class="number">40</span>)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">'m-list'</span>&gt;</span><br><span class="line">      &lt;div className=<span class="string">'m-cards'</span> ref=&#123;cardList&#125; key=&#123;<span class="built_in">Math</span>.random()&#125;&gt;</span><br><span class="line">        &#123;</span><br><span class="line">          !data || !data.components</span><br><span class="line">            ? <span class="literal">null</span></span><br><span class="line">            : data.components.map(<span class="function">(<span class="params">o: Components, i: <span class="built_in">number</span></span>) =&gt;</span> &#123;</span><br><span class="line">              <span class="keyword">return</span> (</span><br><span class="line">                &lt;Card</span><br><span class="line">                  key=&#123;<span class="string">`m-list-btn-<span class="subst">$&#123;i&#125;</span>`</span>&#125;</span><br><span class="line">                  hoverable=&#123;<span class="literal">true</span>&#125;</span><br><span class="line">                  cover=&#123;&lt;img alt=<span class="string">'example'</span> src=<span class="string">'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'</span> /&gt;&#125;</span><br><span class="line">                  actions=&#123;</span><br><span class="line">                    [</span><br><span class="line">                      &lt;a</span><br><span class="line">                        className=&#123;<span class="string">`<span class="subst">$&#123;o.isOwn ? 'm-list-btn-text-disabled' : 'm-list-btn-text'&#125;</span>`</span>&#125;</span><br><span class="line">                        key=&#123;<span class="string">`m-list-btn-<span class="subst">$&#123;i&#125;</span>-1`</span>&#125;</span><br><span class="line">                        href=<span class="string">'javascript:void(0)'</span></span><br><span class="line">                        onClick=&#123;!o.isOwn ? componentsCollect.bind(<span class="literal">null</span>, [o.id, !o.isStored]) : <span class="literal">null</span>&#125;</span><br><span class="line">                      &gt;</span><br><span class="line">                        &lt;Icon <span class="keyword">type</span>=<span class="string">'copy'</span> /&gt;</span><br><span class="line">                        &#123;o.isStored ? <span class="string">'取消收藏'</span> : <span class="string">'收藏'</span>&#125;</span><br><span class="line">                      &lt;<span class="regexp">/a&gt;,</span></span><br><span class="line"><span class="regexp">                      &lt;a</span></span><br><span class="line"><span class="regexp">                        className='m-list-btn-text'</span></span><br><span class="line"><span class="regexp">                        key='m-list-btn-2'</span></span><br><span class="line"><span class="regexp">                        href='javascript:void(0)'</span></span><br><span class="line"><span class="regexp">                      &gt;</span></span><br><span class="line"><span class="regexp">                        &lt;Icon type='file-search' /</span>&gt;</span><br><span class="line">                        文档</span><br><span class="line">                      &lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">                    ]</span></span><br><span class="line"><span class="regexp">                  &#125;</span></span><br><span class="line"><span class="regexp">                &gt;</span></span><br><span class="line"><span class="regexp">                  &lt;Meta</span></span><br><span class="line"><span class="regexp">                    avatar=&#123;&lt;Avatar src='https:/</span><span class="regexp">/zos.alipayobjects.com/</span>rmsportal/ODTLcjxAfvqbxHnVXCYX.png<span class="string">' /&gt;&#125;</span></span><br><span class="line"><span class="string">                    title=&#123;o.name&#125;</span></span><br><span class="line"><span class="string">                    description=&#123;o.description&#125;</span></span><br><span class="line"><span class="string">                  /&gt;</span></span><br><span class="line"><span class="string">                &lt;/Card&gt;</span></span><br><span class="line"><span class="string">              )</span></span><br><span class="line"><span class="string">            &#125;)</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;Pagination totalPages=&#123;Math.ceil(data.compCount / queryState.pagination.size)&#125; total=&#123;data.compCount&#125; /&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  )</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">export default compose(</span></span><br><span class="line"><span class="string">  graphql(</span></span><br><span class="line"><span class="string">    gql(GET_QUERY_STATE),</span></span><br><span class="line"><span class="string">    &#123;</span></span><br><span class="line"><span class="string">      props: (&#123; data: &#123; queryState &#125; &#125;: any) =&gt; (&#123; queryState &#125;)</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  ),</span></span><br><span class="line"><span class="string">  graphql(</span></span><br><span class="line"><span class="string">    gql(GET_COMPONENTS_LIST),</span></span><br><span class="line"><span class="string">    &#123;</span></span><br><span class="line"><span class="string">      options: (&#123; queryState &#125;: any) =&gt; (&#123;</span></span><br><span class="line"><span class="string">        variables: &#123;</span></span><br><span class="line"><span class="string">          ...getCorrectQueryState(queryState)</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;)</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  ),</span></span><br><span class="line"><span class="string">  graphql(gql`</span></span><br><span class="line"><span class="string">    mutation ($id: Int!, $isCollect: Boolean!)&#123;</span></span><br><span class="line"><span class="string">      storeComponent(id: $id, isStore: $isCollect)</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `, &#123;</span></span><br><span class="line"><span class="string">    props: (&#123; mutate &#125;: any) =&gt; (&#123;</span></span><br><span class="line"><span class="string">      componentsCollect: ([id, isCollect]: [number, boolean]) =&gt; &#123;</span></span><br><span class="line"><span class="string">        debugger</span></span><br><span class="line"><span class="string">        mutate(&#123;</span></span><br><span class="line"><span class="string">          variables: &#123; id, isCollect &#125;,</span></span><br><span class="line"><span class="string">          optimisticResponse: &#123;</span></span><br><span class="line"><span class="string">            __typename: Typename.Mutation,</span></span><br><span class="line"><span class="string">            storeComponent: &#123;</span></span><br><span class="line"><span class="string">              __typename: Typename.Component,</span></span><br><span class="line"><span class="string">              id,</span></span><br><span class="line"><span class="string">              isStored: isCollect</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;)</span></span><br><span class="line"><span class="string">  &#125;)</span></span><br><span class="line"><span class="string">)(ListComponent)</span></span><br></pre></td></tr></table></figure>
+<p>写在最后：</p>
+<p>如果认真学习完这扁文档，相信你对Apollo技术栈开发React应用已经算是入门了，今后开发时遇到问题，多看一看官方文档，相信你会很快掌握它。</p>
+<p>由于水平有限，这篇文章是我自己一边翻译一边加入自己的理解而写成的，其中肯定少不了一些不妥或错误的地方，欢迎大家指正！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/react/" rel="tag"># react</a>
+          
+            <a href="/tags/typescript/" rel="tag"># typescript</a>
+          
+            <a href="/tags/apollo-client/" rel="tag"># apollo-client</a>
+          
+            <a href="/tags/Apollo/" rel="tag"># Apollo</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="Oceanxy WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="Oceanxy Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/12/new-操作符到底做了什么？/" rel="next" title="new 操作符到底做了什么？">
+                <i class="fa fa-chevron-left"></i> new 操作符到底做了什么？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Oceanxy" />
+          <p class="site-author-name" itemprop="name">Oceanxy</p>
+          <p class="site-description motion-element" itemprop="description">你无法拒绝一个热衷于前端各种美好效果的工程师！</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/oceanxy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建React项目"><span class="nav-number">1.1.</span> <span class="nav-text">创建React项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建GraphQL服务"><span class="nav-number">1.2.</span> <span class="nav-text">搭建GraphQL服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装需要的包"><span class="nav-number">1.3.</span> <span class="nav-text">安装需要的包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例化Apollo客户端"><span class="nav-number">1.4.</span> <span class="nav-text">实例化Apollo客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写GraphQL查询语句"><span class="nav-number">1.5.</span> <span class="nav-text">编写GraphQL查询语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接Apollo客户端到React"><span class="nav-number">1.6.</span> <span class="nav-text">连接Apollo客户端到React</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Query组件与Mutation组件"><span class="nav-number">2.</span> <span class="nav-text">Query组件与Mutation组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取数据——Query组件"><span class="nav-number">2.1.</span> <span class="nav-text">获取数据——Query组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新数据——Mutation组件"><span class="nav-number">2.2.</span> <span class="nav-text">更新数据——Mutation组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新缓存——mutation后内部自动query"><span class="nav-number">2.3.</span> <span class="nav-text">更新缓存——mutation后内部自动query</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apollo范式化缓存-API"><span class="nav-number">2.4.</span> <span class="nav-text">Apollo范式化缓存 API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中场休息"><span class="nav-number">3.</span> <span class="nav-text">中场休息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地状态管理-详情"><span class="nav-number">4.</span> <span class="nav-text">本地状态管理 详情</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接写入缓存"><span class="nav-number">4.1.</span> <span class="nav-text">直接写入缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#client-指令"><span class="nav-number">4.2.</span> <span class="nav-text">@client 指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地解析器——resolvers"><span class="nav-number">4.3.</span> <span class="nav-text">本地解析器——resolvers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询本地状态"><span class="nav-number">4.4.</span> <span class="nav-text">查询本地状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化本地状态"><span class="nav-number">4.5.</span> <span class="nav-text">初始化本地状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重置本地状态-缓存"><span class="nav-number">4.6.</span> <span class="nav-text">重置本地状态/缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同时请求本地状态和远程数据"><span class="nav-number">4.7.</span> <span class="nav-text">同时请求本地状态和远程数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-client字段作为变量"><span class="nav-number">4.8.</span> <span class="nav-text">使用@client字段作为变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态注入resolver"><span class="nav-number">4.9.</span> <span class="nav-text">动态注入resolver</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脱离React标签的写法"><span class="nav-number">5.</span> <span class="nav-text">脱离React标签的写法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oceanxy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+<p style="margin-bottom: 0;">Hosted by <a href="https://pages.coding.me" style="font-weight: bold;color: gray;">Coding Pages</a></p>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+      
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2145602"></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("E191g8F5s3UAfy93l0N7fzev-gzGzoHsz", "r9EqhsYlCKLtGQ5A9UWBUE90");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+</body>
+</html>

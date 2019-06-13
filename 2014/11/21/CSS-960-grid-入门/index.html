@@ -1,0 +1,1102 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Neucha:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="css,css960," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XieYang-blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="960 GRID SYSTEM 官网 http://960.gs/  什么是CSS框架？CSS框架是一种你能够使用在你的web项目中概念上的结构，是别人已经写完的，而且很完善的CSS定义集合。CSS框架一般是CSS文件的集合，包括基本风格的字体排版，表单样式，表格布局等等，比如：  grid.css 表格布局 layout.css 布局 form.css 表单 general.css CSS常规">
+<meta name="keywords" content="css,css960">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 960 grid 入门">
+<meta property="og:url" content="http://blog.xieyangogo.cn/2014/11/21/CSS-960-grid-入门/index.html">
+<meta property="og:site_name" content="XieYang-blog">
+<meta property="og:description" content="960 GRID SYSTEM 官网 http://960.gs/  什么是CSS框架？CSS框架是一种你能够使用在你的web项目中概念上的结构，是别人已经写完的，而且很完善的CSS定义集合。CSS框架一般是CSS文件的集合，包括基本风格的字体排版，表单样式，表格布局等等，比如：  grid.css 表格布局 layout.css 布局 form.css 表单 general.css CSS常规">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://blog.xieyangogo.cn/blog/images/CSS-960-grid/css-960-1.jpg">
+<meta property="og:image" content="http://blog.xieyangogo.cn/blog/images/CSS-960-grid/css-960-2.jpg">
+<meta property="og:image" content="http://blog.xieyangogo.cn/blog/images/CSS-960-grid/css-960-3.jpg">
+<meta property="og:image" content="http://blog.xieyangogo.cn/blog/images/CSS-960-grid/css-960-4.jpg">
+<meta property="og:image" content="http://blog.xieyangogo.cn/blog/images/CSS-960-grid/css-960-5.jpg">
+<meta property="og:updated_time" content="2018-06-16T04:45:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS 960 grid 入门">
+<meta name="twitter:description" content="960 GRID SYSTEM 官网 http://960.gs/  什么是CSS框架？CSS框架是一种你能够使用在你的web项目中概念上的结构，是别人已经写完的，而且很完善的CSS定义集合。CSS框架一般是CSS文件的集合，包括基本风格的字体排版，表单样式，表格布局等等，比如：  grid.css 表格布局 layout.css 布局 form.css 表单 general.css CSS常规">
+<meta name="twitter:image" content="http://blog.xieyangogo.cn/blog/images/CSS-960-grid/css-960-1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'CBD64E6R0S',
+      apiKey: '2a6f0239ea18967e10d740ceaa4ccbfa',
+      indexName: 'blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索帖子","hits_empty":"未搜索到关于 ${query} 的文章","hits_stats":"在 ${time} ms 内搜索到 ${hits} 条结果"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.xieyangogo.cn/2014/11/21/CSS-960-grid-入门/"/>
+
+
+
+
+
+  <title> CSS 960 grid 入门 | XieYang-blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bcbac8734f5250621c379fd62b357c26";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">XieYang-blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="http://www.xieyangogo.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-list">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-list"></i> <br />
+            
+            文章列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.xieyangogo.cn/2014/11/21/CSS-960-grid-入门/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Oceanxy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="XieYang-blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="XieYang-blog" src="/images/avatar.jpg">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSS 960 grid 入门
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-21T17:05:00+08:00">
+                2014-11-21 17:05:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-06-16T12:45:35+08:00">
+                2018-06-16 12:45:35
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2014/11/21/CSS-960-grid-入门/" class="leancloud_visitors" data-flag-title="CSS 960 grid 入门">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>960 GRID SYSTEM 官网 <a href="http://960.gs/" target="_blank" rel="noopener">http://960.gs/</a></p>
+</blockquote>
+<h3 id="什么是CSS框架？"><a href="#什么是CSS框架？" class="headerlink" title="什么是CSS框架？"></a>什么是CSS框架？</h3><p>CSS框架是一种你能够使用在你的web项目中概念上的结构，是别人已经写完的，而且很完善的CSS定义集合。CSS框架一般是CSS文件的集合，包括基本风格的字体排版，表单样式，表格布局等等，比如：</p>
+<ul>
+<li>grid.css 表格布局</li>
+<li>layout.css 布局</li>
+<li>form.css 表单</li>
+<li>general.css CSS常规设置</li>
+</ul>
+<h3 id="CSS框架的种类："><a href="#CSS框架的种类：" class="headerlink" title="CSS框架的种类："></a>CSS框架的种类：</h3><p>CSS框架很多，可以说太多了，最近几年像潮水般涌出。只是国内用CSS框架的不多，倒是PHP框架和Spring框架用的更多些。比较著名的CSS框架如下，不同的框架完成的任务不一定完全一样，每个框架都有自己的特色：</p>
+<ul>
+<li>YUI Grids CSS</li>
+<li>Blueprint</li>
+<li>YAML CSS Framework</li>
+<li>CleverCSS</li>
+<li>…</li>
+</ul>
+<h3 id="960Grid"><a href="#960Grid" class="headerlink" title="960Grid"></a>960Grid</h3><p>由于电脑显示器有方屏、宽屏，宽屏又分16:9和16:10。分辨率更是多种多样，这么多不同模式下得用户如何能看到外观整齐、一致的网站呢？人们发现一个奇妙的事情：960px的宽度是Very Good！无论什么屏，那种分辨率都通吃。<br>现在有人专门开发了一组网站架构CSS规则，只要遵守这些简单的规则（其实就是class类），你就能快速设计出960px宽度的网页结构来。<br>这，就是960Grid。<br>官网：<a href="http://960.gs/" target="_blank" rel="noopener">http://960.gs/</a></p>
+<h3 id="法律问题"><a href="#法律问题" class="headerlink" title="法律问题"></a>法律问题</h3><p>960网格系统的文件都是免费的，MIT / GPL开源许可协议。大家可以放心大胆使用。</p>
+<h3 id="如何使用960Grid框架？"><a href="#如何使用960Grid框架？" class="headerlink" title="如何使用960Grid框架？"></a>如何使用960Grid框架？</h3><ul>
+<li><p>在html文件中引入相关的外部CSS文件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"css/reset.css"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"css/text.css"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"css/960.css"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在这必须解释一下，960.css为主要排版样式，缺它肯定不行。还有两个css文件：reset.css和text.css，它们的主要作用是为了消除浏览器间显示差异准备的，前者消除了html标签在各浏览器间的差异，而后者则主要针对的是字体。</p>
+</blockquote>
+</li>
+</ul>
+<p>&ensp;</p>
+<ul>
+<li><p>定义一个DIV大容器，放下整个页面：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container_12"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>  这个DIV块一定要设定12列还是16列，其实不管12列还是16列宽度都是960px，只不过看你需不需要更细分的列了。</p>
+</li>
+<li><p>在这个DIV大容器里开始布局网页，首先添加一个LOGO栏，这个栏横向跨越整个960宽度：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container_12"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_12"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>  此时，注意了，在12列的container中，使用了一个12列的grid，下划线后数字就是该DIV所占的列数。当然为了布局方便，我们一定会加入更多的class或id的，最后如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container_12"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_12 logo"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>  设置好 .logo 的CSS的高和背景图片后，能看到如下图所示的界面：<br><img src="/blog/images/CSS-960-grid/css-960-1.jpg" alt=""></p>
+</li>
+</ul>
+<h3 id="设置导航栏"><a href="#设置导航栏" class="headerlink" title="设置导航栏"></a>设置导航栏</h3><p>刚才那个logo块其实已经完工了，但为了清除它对身后的CSS设置影响，建议在每个横向DIV大块做完之后，都加上class=”clear”进行收尾。所以刚才的代码现在更改如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container_12"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_12"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后再加入导航栏的DIV块，和LOGO一样，也是一个横向大块，设置后代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container_12"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_12 logo"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_12 nav"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span>...<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>添加样式后，网页变为这样：<br><img src="/blog/images/CSS-960-grid/css-960-2.jpg" alt=""></p>
+<h3 id="添加PhotoSlide的位置"><a href="#添加PhotoSlide的位置" class="headerlink" title="添加PhotoSlide的位置"></a>添加PhotoSlide的位置</h3><p>一般网站为了漂亮和醒目，会在nav下加入photoslide，有的是js的，有的是flash的，但无论哪种都能把网站衬托起来。当然例子中就不真的放photoslide了。现在要把横行分为两个部分：left和right，left写文字，right放个图片提提神。<br>按原案例样子，left会占据7列的宽度，right将占据5列的宽度，7+5=12列！所以一个class用grid_7，另一个用gird_5。然后直接在块后加上clear类。由于这两个块高度一致，边框也一致，所以都加入一个topslider类设置它们的共同特征。<br>现在把代码写好：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container_12"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_12 logo"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_12 nav"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span>...<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_7 topslider"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_5 topslider"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>填入其它Html标记和各种素材，完成后，如下图所示：<br><img src="/blog/images/CSS-960-grid/css-960-3.jpg" alt=""></p>
+<h3 id="完成接下来的代码"><a href="#完成接下来的代码" class="headerlink" title="完成接下来的代码"></a>完成接下来的代码</h3><p>用两段grid_12的名为class=”spacer”的div夹住四篇文章部分，四篇文章分别使用四个grid_3来完成。为什么是四个grid_3呢？横向12列，4篇等宽文章，每篇12/4=3！如果到现在你还有这个疑问，说明你其实没弄明白960grid的原理。建议回到页首再看下来。<br>加入很多代码后：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container_12"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_12 logo"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_12 nav"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span>...<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_7 topslider"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_5 topslider"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_12 spacer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">  </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_3"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_3"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_3"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_3"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">  </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">  </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_12 spacer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">  </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_4 footer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_4 footer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_4 footer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后添加内容，设置CSS，就是这个页面了：<br><img src="/blog/images/CSS-960-grid/css-960-4.jpg" alt=""></p>
+<p>到目前为止，能明白960Grid原理就达到目的。接下来的是关于这个框架的高级内容部分。</p>
+<h3 id="高级部分："><a href="#高级部分：" class="headerlink" title="高级部分："></a>高级部分：</h3><h4 id="alpha和omega参数"><a href="#alpha和omega参数" class="headerlink" title="alpha和omega参数"></a>alpha和omega参数</h4><p>默认情况下，左右margin都是10px，则列间距为20px，但最左边的容器不需要左margin，最右边的容器不需要右margin，所以要改成这样，用alpha出去左margin，omega除去右margin：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container_12″&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">    &lt;div class="</span><span class="attr">grid_2</span> <span class="attr">alpha</span>"&gt;</span>左侧导航栏<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_8″&gt;主版块&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">    &lt;div class="</span><span class="attr">grid_2</span> <span class="attr">omega</span>"&gt;</span>右侧广告栏<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="prefix和suffix参数"><a href="#prefix和suffix参数" class="headerlink" title="prefix和suffix参数"></a>prefix和suffix参数</h4><p>如同上面那两个margin快捷参数一样，不必非得单独为某个div单独命名id或class，960Grid已经提供了prefix和suffix来处理padding。左侧补白（padding-left）是prefix_i，右侧的是suffix_i。i的值就是补白所占的列数，比如你想左侧加2列补白，则可以使用：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_5 prefix_2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="push和pull参数"><a href="#push和pull参数" class="headerlink" title="push和pull参数"></a>push和pull参数</h4><p>最绝的还是这两个参数，一般人用的不多。因为大家都满足自己的网页宽度是960px了，如果现在真想把其中一个涉及到图片或广告的div做到1024px宽，怎么办？其实很好解决，一个div做reletive，它的子div的为absolue并且left为负值就可以，但这种CSS有点麻烦。<br>960Grid提供push和pull参数，push是推，pull是拉。关键是在什么位置推拉，就是说那里才是动作的起点？我们浏览网页时几乎都是自左向右看，所以该动作也以左侧为起点，现在想象你就站在最左边。push_i就是把一个块向右推移i个列宽，pull_i就是把这个块向左拉i个列宽。<br>push和pull动作对其他兄弟块没有影响。可以直接推出960px去它就在整个网页右边独单显示了，也可以pull出来，就在左边单独显示了。有点像sohu侧边广告的感觉。上个图，直观感受下吧，但sohu可不是用push和pull做出来的，我的意思是和sohu的效果一样。<br><img src="/blog/images/CSS-960-grid/css-960-5.jpg" alt=""></p>
+<h4 id="clear参数"><a href="#clear参数" class="headerlink" title="clear参数"></a>clear参数</h4><p>class=”clear”，什么时候用呢。当你想换行的时候就使用它，即使一个横行只有grid_5和grid_4，就是说没有占满12列，也可以在其后增加一个让其后的任何内容都从下一行行首开始：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如果遇到这种情况：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_4"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_5"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid_3"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>原本横向占满12列的4+5+3，中间夹个clear。会发生什么事呢？grid_3这个块就会从下一个横行最左边出现。所以clear就是一个回车，相当于块的 &lt;br /&gt;。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>margin参数是alpha和omega；</li>
+<li>padding参数是prefix和suffix；</li>
+<li>脱离文档流移动参数是push和pull；</li>
+<li>clear是块回车换行。</li>
+</ul>
+<blockquote>
+<p>960 grid css web框架。或许不能称作框架。<br>官方网站：<a href="http://960.gs/" target="_blank" rel="noopener">http://960.gs/</a></p>
+<p>因为：</p>
+<p>960px = 12 <em> (60px + 20px) = 16 </em> (40px + 20px) = 24 * (30px + 10px)</p>
+<p>所以：</p>
+<p>960 个像素作 12 栏、16栏或 24 栏分割</p>
+<p>12 栏和 16 栏分割的每个 grid 左右 margin 各 10px，24 栏分割每个 grid 左右 margin 各 5px。</p>
+</blockquote>
+<p>&ensp;</p>
+<p>几个重要的关键字和概念:</p>
+<ul>
+<li>container容器：960px的宽度，左右margin auto 居中。</li>
+<li>grid_x x方格：最小方格宽度*x px宽度+左margin 10px+右margin 10px（24栏布局分别为5px）</li>
+<li>prefix_x前间距：使用padding属性。让grid和前面保持（最小方格宽度+间距）<em>x的距离.(例如 12栏的 prefix_3 的前间距为 （60px+20px）</em>3 即向前隔开三个方格的距离 )。</li>
+<li>suffix_x 后间距：同理prefix_x,向后隔开x个方格。</li>
+<li>pull_x 向左推：在正常的布局下向左推x个方格。</li>
+<li>push_x 向右推：在正常的布局下向右推x个方格。</li>
+<li>alpha 清除前间距：清除使用该class方格的前间距，方格会自动全部向前。</li>
+<li>omega 清楚后间距：清除使用该class方格的后间距。</li>
+<li><p>clear 换行（或者这样说有不妥）：重新换行继续方格布局。</p>
+</li>
+<li><p>心得：container 容器一定要外包在所有的grid布局的外面。它就像一页纸一样，我们可以在内部写方格。grid_x控制方格的宽度，prefix_x suffix_x控制方格间距，pull_x push_x控制方格左右浮动，alpha omega 清除左右的margin。clear 换行。</p>
+</li>
+<li>所以呢，可以理解为就是类似于在container内用方格写字就好啦！</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+            <a href="/tags/css960/" rel="tag"># css960</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="Oceanxy WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="Oceanxy Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/11/20/高效-jQuery-的奥秘/" rel="next" title="高效 jQuery 的奥秘">
+                <i class="fa fa-chevron-left"></i> 高效 jQuery 的奥秘
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/12/23/javascript难点剖析一：prototype（原型）/" rel="prev" title="javascript难点剖析一：prototype（原型）">
+                javascript难点剖析一：prototype（原型） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Oceanxy" />
+          <p class="site-author-name" itemprop="name">Oceanxy</p>
+          <p class="site-description motion-element" itemprop="description">你无法拒绝一个热衷于前端各种美好效果的工程师！</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/oceanxy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是CSS框架？"><span class="nav-number">1.</span> <span class="nav-text">什么是CSS框架？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS框架的种类："><span class="nav-number">2.</span> <span class="nav-text">CSS框架的种类：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#960Grid"><span class="nav-number">3.</span> <span class="nav-text">960Grid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#法律问题"><span class="nav-number">4.</span> <span class="nav-text">法律问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用960Grid框架？"><span class="nav-number">5.</span> <span class="nav-text">如何使用960Grid框架？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置导航栏"><span class="nav-number">6.</span> <span class="nav-text">设置导航栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加PhotoSlide的位置"><span class="nav-number">7.</span> <span class="nav-text">添加PhotoSlide的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完成接下来的代码"><span class="nav-number">8.</span> <span class="nav-text">完成接下来的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级部分："><span class="nav-number">9.</span> <span class="nav-text">高级部分：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#alpha和omega参数"><span class="nav-number">9.1.</span> <span class="nav-text">alpha和omega参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#prefix和suffix参数"><span class="nav-number">9.2.</span> <span class="nav-text">prefix和suffix参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#push和pull参数"><span class="nav-number">9.3.</span> <span class="nav-text">push和pull参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#clear参数"><span class="nav-number">9.4.</span> <span class="nav-text">clear参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oceanxy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+<p style="margin-bottom: 0;">Hosted by <a href="https://pages.coding.me" style="font-weight: bold;color: gray;">Coding Pages</a></p>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+      
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2145602"></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("E191g8F5s3UAfy93l0N7fzev-gzGzoHsz", "r9EqhsYlCKLtGQ5A9UWBUE90");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+</body>
+</html>

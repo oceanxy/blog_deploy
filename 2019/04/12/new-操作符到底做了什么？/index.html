@@ -1,0 +1,1145 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Neucha:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,基础知识," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XieYang-blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="相信很多才接触前端的小伙伴甚至工作几年的前端小伙伴对new这个操作符的了解还停留在一知半解的地步，比较模糊。 就比如前不久接触到一个入职两年的前端小伙伴，他告诉我new是用来创建对象的，无可厚非，可能很多人都会这么答！ 那这么答到底是错很是对呢？   下面我们全面来讨论一下这个问题： 我们要拿到一个对象，有很多方式，其中最常见的一种便是对象字面量： 1var obj = &amp;#123;&amp;#125;">
+<meta name="keywords" content="javascript,基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="new 操作符到底做了什么？">
+<meta property="og:url" content="http://blog.xieyangogo.cn/2019/04/12/new-操作符到底做了什么？/index.html">
+<meta property="og:site_name" content="XieYang-blog">
+<meta property="og:description" content="相信很多才接触前端的小伙伴甚至工作几年的前端小伙伴对new这个操作符的了解还停留在一知半解的地步，比较模糊。 就比如前不久接触到一个入职两年的前端小伙伴，他告诉我new是用来创建对象的，无可厚非，可能很多人都会这么答！ 那这么答到底是错很是对呢？   下面我们全面来讨论一下这个问题： 我们要拿到一个对象，有很多方式，其中最常见的一种便是对象字面量： 1var obj = &amp;#123;&amp;#125;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://blog.xieyangogo.cn/images/newOperation/qqpyimg1555239090.gif">
+<meta property="og:image" content="http://blog.xieyangogo.cn/images/newOperation/1555238692.jpg">
+<meta property="og:image" content="http://blog.xieyangogo.cn/images/newOperation/1555238450.jpg">
+<meta property="og:image" content="http://blog.xieyangogo.cn/images/newOperation/newOperation.png">
+<meta property="og:image" content="http://blog.xieyangogo.cn/images/newOperation/newOperation2.png">
+<meta property="og:image" content="http://blog.xieyangogo.cn/images/newOperation/1555237869.jpg">
+<meta property="og:image" content="http://blog.xieyangogo.cn/images/newOperation/qqpyimg1555239497.gif">
+<meta property="og:updated_time" content="2019-04-15T01:28:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="new 操作符到底做了什么？">
+<meta name="twitter:description" content="相信很多才接触前端的小伙伴甚至工作几年的前端小伙伴对new这个操作符的了解还停留在一知半解的地步，比较模糊。 就比如前不久接触到一个入职两年的前端小伙伴，他告诉我new是用来创建对象的，无可厚非，可能很多人都会这么答！ 那这么答到底是错很是对呢？   下面我们全面来讨论一下这个问题： 我们要拿到一个对象，有很多方式，其中最常见的一种便是对象字面量： 1var obj = &amp;#123;&amp;#125;">
+<meta name="twitter:image" content="http://blog.xieyangogo.cn/images/newOperation/qqpyimg1555239090.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'CBD64E6R0S',
+      apiKey: '2a6f0239ea18967e10d740ceaa4ccbfa',
+      indexName: 'blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索帖子","hits_empty":"未搜索到关于 ${query} 的文章","hits_stats":"在 ${time} ms 内搜索到 ${hits} 条结果"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.xieyangogo.cn/2019/04/12/new-操作符到底做了什么？/"/>
+
+
+
+
+
+  <title> new 操作符到底做了什么？ | XieYang-blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bcbac8734f5250621c379fd62b357c26";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">XieYang-blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="http://www.xieyangogo.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-list">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-list"></i> <br />
+            
+            文章列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.xieyangogo.cn/2019/04/12/new-操作符到底做了什么？/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Oceanxy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="XieYang-blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="XieYang-blog" src="/images/avatar.jpg">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                new 操作符到底做了什么？
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-12T10:48:05+08:00">
+                2019-04-12 10:48:05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-15T09:28:24+08:00">
+                2019-04-15 09:28:24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/04/12/new-操作符到底做了什么？/" class="leancloud_visitors" data-flag-title="new 操作符到底做了什么？">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>相信很多才接触前端的小伙伴甚至工作几年的前端小伙伴对new这个操作符的了解还停留在一知半解的地步，比较模糊。</p>
+<p>就比如前不久接触到一个入职两年的前端小伙伴，他告诉我new是用来创建对象的，无可厚非，可能很多人都会这么答！</p>
+<p>那这么答到底是错很是对呢？</p>
+</blockquote>
+<hr>
+<p>下面我们全面来讨论一下这个问题：</p>
+<p>我们要拿到一个对象，有很多方式，其中最常见的一种便是对象字面量：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>但是从语法上来看，这就是一个赋值语句，是把对面字面量赋值给了<code>obj</code>这个变量（这样说或许不是很准确，其实这里是得到了一个对象的实例！！）</p>
+<p>很多时候，我们说要创建一个对象，很多小伙伴双手一摸键盘，啪啪几下就敲出了这句代码。</p>
+<p>上面说了，这句话其实只是得到了一个对象的实例，那这句代码到底还能不能和创建对象画上等号呢？</p>
+</blockquote>
+<p>我们继续往下看。</p>
+<p>要拿到一个对象的实例，还有一种和对象字面量等价的做法就是构造函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这句代码一敲出来，相信小伙伴们对刚才我说的<code>obj</code>只是一个实例对象没有异议了吧！</p>
+<p>那很多小伙伴又会问了：这不就是<code>new</code>了一个新对象出来嘛！</p>
+<p>没错，这确实是new了一个新对象出来，因为javascript之中，万物解释对象。</p>
+<p>obj是一个对象，而且是通过new运算符得到的，所以说很多小伙伴就肯定的说：new就是用来创建对象的！</p>
+<p>这就不难解释很多人把创建对象和实例化对象混为一谈!!</p>
+<p>我们在换个思路看看：既然js一切皆为对象，那为什么还需要创建对象呢？本身就是对象，我们何来创建一说？那我们可不可以把这是一种<code>继承</code>呢？</p>
+<p><img src="/images/newOperation/qqpyimg1555239090.gif" alt=""></p>
+<p>说了这么多，相信不少伙伴已经看晕了，但是我们的目的就是一个：理清new是来做继承的而不是所谓的创建对象！！</p>
+</blockquote>
+<hr>
+<p>那继承得到的实例对象有什么特点呢？</p>
+<ol>
+<li>访问构造函数里面的属性</li>
+<li>访问原型链上的属性</li>
+</ol>
+<p>下面是一段经典的继承，通过这段代码来热热身，好戏马上开始：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = <span class="string">'男'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.nation = <span class="string">'汉'</span></span><br><span class="line"></span><br><span class="line">Person.prototype.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`My name is <span class="subst">$&#123;<span class="keyword">this</span>.age&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">'小明'</span>, <span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name)</span><br><span class="line"><span class="built_in">console</span>.log(person.age)</span><br><span class="line"><span class="built_in">console</span>.log(person.gender)</span><br><span class="line"><span class="built_in">console</span>.log(person.nation)</span><br><span class="line"></span><br><span class="line">person.say()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>现在我们来解决第一个问题：我们可以通过什么方式实现访问到构造函数里面的属性呢？答案是<code>call</code>或<code>apply</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = [<span class="string">'A'</span>, <span class="string">'B'</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  Parent.call(<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child = <span class="keyword">new</span> Child()</span><br><span class="line"><span class="built_in">console</span>.log(child.name) <span class="comment">// ['A', 'B']</span></span><br><span class="line"></span><br><span class="line">child.name.push(<span class="string">'C'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(child.name) <span class="comment">// ['A', 'B', 'C']</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个问题解决了，那我们又来解决第二个：那又怎么访问原型链上的属性呢？答案是<code>__proto__</code></li>
+</ul>
+<p>现在我们把上面那段热身代码稍加改造，不使用new来创建实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = <span class="string">'男'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.nation = <span class="string">'汉'</span></span><br><span class="line"></span><br><span class="line">Person.prototype.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`My name is <span class="subst">$&#123;<span class="keyword">this</span>.age&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// var person = new Person('小明', 25)</span></span><br><span class="line"><span class="keyword">var</span> person = New(Person, <span class="string">'小明'</span>, <span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name)</span><br><span class="line"><span class="built_in">console</span>.log(person.age)</span><br><span class="line"><span class="built_in">console</span>.log(person.gender)</span><br><span class="line"><span class="built_in">console</span>.log(person.nation)</span><br><span class="line"></span><br><span class="line">person.say()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line">  Constructor = [].shift.call(<span class="built_in">arguments</span>) <span class="comment">// 获取arguments第一个参数：构造函数</span></span><br><span class="line">  <span class="comment">// 注意：此时的arguments参数在shift()方法的截取后只剩下两个元素</span></span><br><span class="line">  obj.__proto__ = Constructor.prototype <span class="comment">// 把构造函数的原型赋值给obj对象</span></span><br><span class="line">  Constructor.apply(obj, <span class="built_in">arguments</span>) <span class="comment">// 改变够着函数指针，指向obj，这是刚才上面说到的访问构造函数里面的属性和方法的方式</span></span><br><span class="line">  <span class="keyword">return</span> obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码中的New函数，就是new操作符的实现</p>
+<p><code>主要步骤：</code></p>
+<p><code>1. 创建一个空对象</code></p>
+<p><code>2. 获取arguments第一个参数</code></p>
+<p><code>3. 将构造函数的原型链赋给obj</code></p>
+<p><code>4. 使用apply改变构造函数this指向，指向obj对象，其后，obj就可以访问到构造函数中的属性以及原型上的属性和方法了</code></p>
+<p><code>5. 返回obj对象</code></p>
+<blockquote>
+<p>可能很多小伙伴看到这里觉得<code>new</code>不就是做了这些事情吗，然而~~</p>
+<p>然而我们却忽略了一点，js里面的函数是有返回值的，即使构造函数也不例外。</p>
+</blockquote>
+<p>如果我们在构造函数里面返回一个对象或一个基本值，上面的New函数会怎样？</p>
+<p>我们再来看一段代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = <span class="string">'男'</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    name: name,</span><br><span class="line">    gender: <span class="string">'男'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.nation = <span class="string">'汉'</span></span><br><span class="line"></span><br><span class="line">Person.prototype.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`My name is <span class="subst">$&#123;<span class="keyword">this</span>.age&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">'小明'</span>, <span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name)</span><br><span class="line"><span class="built_in">console</span>.log(person.age)</span><br><span class="line"><span class="built_in">console</span>.log(person.gender)</span><br><span class="line"><span class="built_in">console</span>.log(person.nation)</span><br><span class="line"></span><br><span class="line">person.say()</span><br></pre></td></tr></table></figure></p>
+<p>执行代码，发现只有<code>name</code>和<code>gender</code>这两个字段如期输出，<code>age</code>、<code>nation</code>为undefined，<code>say()</code>报错。</p>
+<p>改一下代码构造函数的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = <span class="string">'男'</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// return &#123;</span></span><br><span class="line">  <span class="comment">//   name: name,</span></span><br><span class="line">  <span class="comment">//   gender: '男'</span></span><br><span class="line">  <span class="comment">// &#125;</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure></p>
+<p>执行一下代码，发现所有字段终于如期输出。</p>
+<p><code>这里做个小结：</code></p>
+<p><code>1. 当构造函数返回引用类型时，构造里面的属性不能使用，只能使用返回的对象；</code></p>
+<p><code>2. 当构造函数返回基本类型时，和没有返回值的情况相同，构造函数不受影响。</code></p>
+<p>那我们现在来考虑下New函数要怎么改才能实现上面总结的两点功能呢？继续往下看：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line">  Constructor = [].shift.call(<span class="built_in">arguments</span>)</span><br><span class="line">  obj.__proto__ = Constructor.prototype</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Constructor.apply(obj, arguments)</span></span><br><span class="line">  <span class="keyword">var</span> result = Constructor.apply(obj, <span class="built_in">arguments</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// return obj</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> result === <span class="string">'object'</span> ? result : obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = New(Person, <span class="string">'小明'</span>, <span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name)</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<p>执行此代码，发现已经实现了上面总结的两点。</p>
+<p>解决方案：使用变量接收构造函数的返回值，然后在New函数里面判断一下返回值类型，根据不同类型返回不同的值。</p>
+<blockquote>
+<p>看到这里。又有小伙伴说，这下new已经完全实现了吧？！！</p>
+<p>答案肯定是否定的。</p>
+</blockquote>
+<p>下面我们继续看一段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = <span class="string">'男'</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 返回引用类型</span></span><br><span class="line">  <span class="comment">// return &#123;</span></span><br><span class="line">  <span class="comment">//   name: name,</span></span><br><span class="line">  <span class="comment">//   gender: '男'</span></span><br><span class="line">  <span class="comment">// &#125;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 返回基本类型</span></span><br><span class="line">  <span class="comment">// return 1</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 例外</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再执行代码，发现又出问题了！！！</p>
+<blockquote>
+<p>又出问题了！为什么……？<br>…<br>刚才不是总结了返回基本类型时构造函数不受影响吗，而null就是基本类型啊？<br>…<br><img src="/images/newOperation/1555238692.jpg" alt=""></p>
+</blockquote>
+<p>解惑：null是基本类型没错，但是使用操作符typeof后我们不难发现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span> === <span class="string">'object'</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>特例：<code>typeof null</code>返回为<code>&#39;object&#39;</code>，因为特殊值<code>null</code>被认为是一个<code>空的对象引用</code>。</p>
+<p>明白了这一点，那问题就好解决了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line">  Constructor = [].shift.call(<span class="built_in">arguments</span>)</span><br><span class="line">  obj.__proto__ = Constructor.prototype</span><br><span class="line">  <span class="comment">// Constructor.apply(obj, arguments)</span></span><br><span class="line">  <span class="keyword">var</span> result = Constructor.apply(obj, <span class="built_in">arguments</span>)</span><br><span class="line">  <span class="comment">// return obj</span></span><br><span class="line">  <span class="comment">// return typeof result === 'object' ? result : obj</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> result === <span class="string">'object'</span> ? result || obj : obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = New(Person, <span class="string">'小明'</span>, <span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name)</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<p>解决方案：判断一下构造函数返回值result，如果result是一个引用（引用类型和null），就返回result，但如果此时result为false（null），就使用操作符<code>||</code>之后的<code>obj</code></p>
+<blockquote>
+<p>好了，到现在应该又有小伙伴发问了，这下New函数是彻彻底底实现了吧！！！</p>
+<p>答案是，离完成不远了！！</p>
+</blockquote>
+<p>在功能上，New函数基本完成了，但是在代码严谨度上，我们还需要做一点工作，继续往下看：</p>
+<p>这里，我们在文章开篇做的铺垫要派上用场了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>实际上等价于</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br></pre></td></tr></table></figure>
+<p>前面说了，以上两段代码其实只是获取了object对象的一个实例。再者，<code>我们本来就是要实现new，但是我们在实现new的过程中却使用了new</code>！</p>
+<p>这个问题把我们引入到了到底是先有鸡还是先有蛋的问题上！</p>
+<p>这里，我们就要考虑到ECMAScript底层的API了——<code>Object.create(null)</code></p>
+<p>这句代码的意思才是真真切切地<code>创建</code>了一个对象！！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// var obj = &#123;&#125;</span></span><br><span class="line">  <span class="comment">// var obj = new Object()</span></span><br><span class="line">  <span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  Constructor = [].shift.call(<span class="built_in">arguments</span>)</span><br><span class="line">  obj.__proto__ = Constructor.prototype</span><br><span class="line">  <span class="comment">// Constructor.apply(obj, arguments)</span></span><br><span class="line">  <span class="keyword">var</span> result = Constructor.apply(obj, <span class="built_in">arguments</span>)</span><br><span class="line">  <span class="comment">// return obj</span></span><br><span class="line">  <span class="comment">// return typeof result === 'object' ? result : obj</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> result === <span class="string">'object'</span> ? result || obj : obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = New(Person, <span class="string">'小明'</span>, <span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name)</span><br><span class="line"><span class="built_in">console</span>.log(person.age)</span><br><span class="line"><span class="built_in">console</span>.log(person.gender)</span><br><span class="line"><span class="comment">// 这样改了之后，以下两句先注释掉，原因后面再讨论</span></span><br><span class="line"><span class="comment">// console.log(person.nation)</span></span><br><span class="line"><span class="comment">// person.say()</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>好了好了，小伙伴常常舒了一口气，这样总算完成了！！<br>但是，现实总是残酷的！<br><img src="/images/newOperation/1555238450.jpg" alt=""><br>小伙伴：啥？还有完没完？</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = <span class="string">'男'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.nation = <span class="string">'汉'</span></span><br><span class="line"></span><br><span class="line">Person.prototype.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`My name is <span class="subst">$&#123;<span class="keyword">this</span>.age&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// var obj = &#123;&#125;</span></span><br><span class="line">  <span class="comment">// var obj = new Object()</span></span><br><span class="line">  <span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  Constructor = [].shift.call(<span class="built_in">arguments</span>)</span><br><span class="line">  obj.__proto__ = Constructor.prototype</span><br><span class="line">  <span class="comment">// Constructor.apply(obj, arguments)</span></span><br><span class="line">  <span class="keyword">var</span> result = Constructor.apply(obj, <span class="built_in">arguments</span>)</span><br><span class="line">  <span class="comment">// return obj</span></span><br><span class="line">  <span class="comment">// return typeof result === 'object' ? result : obj</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> result === <span class="string">'object'</span> ? result || obj : obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = New(Person, <span class="string">'小明'</span>, <span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name)</span><br><span class="line"><span class="built_in">console</span>.log(person.age)</span><br><span class="line"><span class="built_in">console</span>.log(person.gender)</span><br><span class="line"><span class="comment">// 这里解开刚才的注释</span></span><br><span class="line"><span class="built_in">console</span>.log(person.nation)</span><br><span class="line">person.say()</span><br></pre></td></tr></table></figure>
+<p>别急，我们执行一下修改后的代码，发现原型链上的属性<code>nation</code>和方法<code>say()</code>报错，这又是为什么呢？</p>
+<p><img src="/images/newOperation/newOperation.png" alt=""></p>
+<p><img src="/images/newOperation/newOperation2.png" alt=""></p>
+<p>从上图我们可以清除地看到，<code>Object.create(null)</code>创建的对象是没有原型链的，而后两个对象则是拥有<code>__proto__</code>属性，拥有原型链，这也证明了后两个对象是通过继承得来的。</p>
+<p>那既然通过<code>Object.create(null)</code>创建的对象没有原型链（原型链断了），那我们在创建对象的时候把原型链加上不就行了，那怎么加呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">  <span class="keyword">this</span>.gender = <span class="string">'男'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.nation = <span class="string">'汉'</span></span><br><span class="line"></span><br><span class="line">Person.prototype.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`My name is <span class="subst">$&#123;<span class="keyword">this</span>.age&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  Constructor = [].shift.call(<span class="built_in">arguments</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// var obj = &#123;&#125;</span></span><br><span class="line">  <span class="comment">// var obj = new Object()</span></span><br><span class="line">  <span class="comment">// var obj = Object.create(null)</span></span><br><span class="line">  <span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(Constructor.prototype)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// obj.__proto__ = Constructor.prototype</span></span><br><span class="line">  <span class="comment">// Constructor.apply(obj, arguments)</span></span><br><span class="line">  <span class="keyword">var</span> result = Constructor.apply(obj, <span class="built_in">arguments</span>)</span><br><span class="line">  <span class="comment">// return obj</span></span><br><span class="line">  <span class="comment">// return typeof result === 'object' ? result : obj</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> result === <span class="string">'object'</span> ? result || obj : obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = New(Person, <span class="string">'小明'</span>, <span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name)</span><br><span class="line"><span class="built_in">console</span>.log(person.age)</span><br><span class="line"><span class="built_in">console</span>.log(person.gender)</span><br><span class="line"><span class="built_in">console</span>.log(person.nation)</span><br><span class="line"></span><br><span class="line">person.say()</span><br></pre></td></tr></table></figure>
+<p>这样创建的对象就拥有了它初始的原型链了，这个原型链是我们传进来的构造函数赋予它的。</p>
+<p>也就是说，我们在创建新对象的时候，就为它指定了原型链了——<code>新创建的对象继承自传进来的构造函数！</code></p>
+<blockquote>
+<p>看到这里，小伙伴们长长舒了一口气，有本事你再给我安排一个坑出来！</p>
+<p><img src="/images/newOperation/1555237869.jpg" alt=""></p>
+<p>既然都看到这里了，大家要相信我们离最终的曙光已经不远了！</p>
+<p><img src="/images/newOperation/qqpyimg1555239497.gif" alt=""></p>
+<p>我想说的是，坑是没有了，但是为了程序员吹毛求疵的精神！哦不对，是精益求精的精神，我们还有必要啰嗦一点点！！</p>
+</blockquote>
+<p>想必细心的小伙伴已经注意到了，为什么最后一步中的以下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Constructor = [].shift.call(<span class="built_in">arguments</span>)</span><br><span class="line"><span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(Constructor.prototype)</span><br></pre></td></tr></table></figure>
+<p>不能使用以下代码来代替？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">Constructor = [].shift.call(<span class="built_in">arguments</span>)</span><br><span class="line">obj.__proto__ = Constructor.prototype</span><br></pre></td></tr></table></figure>
+<p>换个方式说，这两段代码大致的意思基本相同：<code>都是将构造器的原型赋予新创建的对象。</code>但是为何第二段代码要报错（访问不到原型链上的属性）呢？</p>
+<p>这个问题很吃基本功，认真去研究研究js的底层API<code>Object.create</code>以及原型链等知识，就会明白其中的道理。小伙伴可以拉到文章末尾，我把重点都记录下来了，以供大家参考。</p>
+<hr>
+<p>现在，我们来梳理下最终的New函数做了什么事，也就是本文讨论的结果——new操作符到底做了什么？</p>
+<ol>
+<li>获取实参中的第一个参数（构造函数），就是调用New函数传进来的第一个参数，暂时记为<code>Constructor</code>；</li>
+<li>使用<code>Constructor</code>的原型链结合<code>Object.create</code>来<code>创建</code>一个对象，此时新对象的原型链为<code>Constructor</code>函数的原型对象；（结合我们上面讨论的，要访问原型链上面的属性和方法，要使用实例对象的<strong>proto</strong>属性）</li>
+<li>改变<code>Constructor</code>函数的this指向，指向新创建的实例对象，然后<code>call</code>方法再调用<code>Constructor</code>函数，为新对象赋予属性和方法；（结合我们上面讨论的，要访问构造函数的属性和方法，要使用call或apply）</li>
+<li>返回新创建的对象，为<code>Constructor</code>函数的一个实例对象。</li>
+</ol>
+<p>现在我，我们来回答文章开始时提出的问题，new是用来创建对象的吗？</p>
+<p><code>现在我们可以勇敢的回答，new是用来做继承的，而创建对象的其实是Object.create(null)。</code><br><code>在new操作符的作用下，我们使用新创建的对象去继承了他的构造函数上的属性和方法、以及他的原型链上的属性和方法！</code></p>
+<hr>
+<p>写在最后：</p>
+<blockquote>
+<p>补充一点关于<code>原型链</code>的知识:</p>
+<ol>
+<li>JavaScript中的函数也是对象，而且对象除了使用字面量定以外，都需要通过函数来创建对象；</li>
+<li>prototype属性可以给函数和对象添加可共享（继承）的方法、属性，而<strong>proto</strong>是查找某函数或对象的原型链方式；</li>
+<li>prototype和<strong>proto</strong>都指向原型对象；</li>
+<li>任意一个函数（包括构造函数）都有一个prototype属性，指向该函数的原型对象；</li>
+<li>任意一个实例化的对象，都有一个<strong>proto</strong>属性，指向该实例化对象的构造函数的原型对象。</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>补充一下关于<code>Object.create()</code>的知识：</p>
+<ol>
+<li>Object.create(null)可以创建一个没有原型链、真正意义上的空对象，该对象不拥有js原生对象（Object）的任何特性和功能。<br>就如：即使通过人为赋值的方式（<code>newObj.__proto__ = constructor.prototype</code>）给这个对象赋予了原型链，<br>也不能实现原型链逐层查找属性的功能，因为这个对象看起来似乎即使有了<code>&quot;__proto__&quot;</code>属性，但是它始终没有直接或间接继承自Object.prototype,<br>也就不可能拥有js原生对象（Object）的特性或功能了；</li>
+<li>该API配合Object.defineProperty可以创建javascript极其灵活的自定义对象；</li>
+<li>该API是实现继承的一种方式；</li>
+<li>…</li>
+</ol>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/基础知识/" rel="tag"># 基础知识</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="Oceanxy WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="Oceanxy Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/27/JavaScript设计模式/" rel="next" title="JavaScript设计模式">
+                <i class="fa fa-chevron-left"></i> JavaScript设计模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/12/React-GraphQL-apollo-client技术栈简要介绍-基于官方文档v2-5/" rel="prev" title="React + GraphQL + apollo-client技术栈简要介绍(基于官方文档v2.5)">
+                React + GraphQL + apollo-client技术栈简要介绍(基于官方文档v2.5) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Oceanxy" />
+          <p class="site-author-name" itemprop="name">Oceanxy</p>
+          <p class="site-description motion-element" itemprop="description">你无法拒绝一个热衷于前端各种美好效果的工程师！</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/oceanxy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oceanxy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+<p style="margin-bottom: 0;">Hosted by <a href="https://pages.coding.me" style="font-weight: bold;color: gray;">Coding Pages</a></p>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+      
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2145602"></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("E191g8F5s3UAfy93l0N7fzev-gzGzoHsz", "r9EqhsYlCKLtGQ5A9UWBUE90");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+</body>
+</html>

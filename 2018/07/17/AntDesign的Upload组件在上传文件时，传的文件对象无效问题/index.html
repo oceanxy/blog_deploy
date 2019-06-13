@@ -1,0 +1,1054 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Neucha:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="React,Ant Design,File,Upload," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XieYang-blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1、问题描述ant design的Upload 组件(下称‘Upload 组件’)封装到FormData对象后，文件对象被转换成 &amp;#39;[object Object]&amp;#39; 的字符串形式，文件流失效。 2、原因分析 先从Upload 组件说起  Upload 组件在文件上传前后都有诸多的回调函数，其中最常用的就是onChange回调函数，它在上传文件状态发生改变时被调用，这个回调函数有一个">
+<meta name="keywords" content="React,Ant Design,File,Upload">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AntDesign的Upload组件在上传文件时，传的文件对象无效问题">
+<meta property="og:url" content="http://blog.xieyangogo.cn/2018/07/17/AntDesign的Upload组件在上传文件时，传的文件对象无效问题/index.html">
+<meta property="og:site_name" content="XieYang-blog">
+<meta property="og:description" content="1、问题描述ant design的Upload 组件(下称‘Upload 组件’)封装到FormData对象后，文件对象被转换成 &amp;#39;[object Object]&amp;#39; 的字符串形式，文件流失效。 2、原因分析 先从Upload 组件说起  Upload 组件在文件上传前后都有诸多的回调函数，其中最常用的就是onChange回调函数，它在上传文件状态发生改变时被调用，这个回调函数有一个">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://blog.xieyangogo.cn/images/antDesignUploadFile/15.5.png">
+<meta property="og:image" content="http://blog.xieyangogo.cn/images/antDesignUploadFile/15.5-2.png">
+<meta property="og:updated_time" content="2018-08-09T06:55:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AntDesign的Upload组件在上传文件时，传的文件对象无效问题">
+<meta name="twitter:description" content="1、问题描述ant design的Upload 组件(下称‘Upload 组件’)封装到FormData对象后，文件对象被转换成 &amp;#39;[object Object]&amp;#39; 的字符串形式，文件流失效。 2、原因分析 先从Upload 组件说起  Upload 组件在文件上传前后都有诸多的回调函数，其中最常用的就是onChange回调函数，它在上传文件状态发生改变时被调用，这个回调函数有一个">
+<meta name="twitter:image" content="http://blog.xieyangogo.cn/images/antDesignUploadFile/15.5.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'CBD64E6R0S',
+      apiKey: '2a6f0239ea18967e10d740ceaa4ccbfa',
+      indexName: 'blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索帖子","hits_empty":"未搜索到关于 ${query} 的文章","hits_stats":"在 ${time} ms 内搜索到 ${hits} 条结果"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.xieyangogo.cn/2018/07/17/AntDesign的Upload组件在上传文件时，传的文件对象无效问题/"/>
+
+
+
+
+
+  <title> AntDesign的Upload组件在上传文件时，传的文件对象无效问题 | XieYang-blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bcbac8734f5250621c379fd62b357c26";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">XieYang-blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="http://www.xieyangogo.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-list">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-list"></i> <br />
+            
+            文章列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.xieyangogo.cn/2018/07/17/AntDesign的Upload组件在上传文件时，传的文件对象无效问题/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Oceanxy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="XieYang-blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="XieYang-blog" src="/images/avatar.jpg">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                AntDesign的Upload组件在上传文件时，传的文件对象无效问题
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-17T15:37:05+08:00">
+                2018-07-17 15:37:05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-09T14:55:40+08:00">
+                2018-08-09 14:55:40
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/07/17/AntDesign的Upload组件在上传文件时，传的文件对象无效问题/" class="leancloud_visitors" data-flag-title="AntDesign的Upload组件在上传文件时，传的文件对象无效问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1、问题描述"><a href="#1、问题描述" class="headerlink" title="1、问题描述"></a>1、问题描述</h4><p><code>ant design</code>的<code>Upload 组件</code>(下称‘Upload 组件’)封装到<code>FormData</code>对象后，文件对象被转换成 <code>&#39;[object Object]&#39;</code> 的字符串形式，文件流失效。</p>
+<h4 id="2、原因分析"><a href="#2、原因分析" class="headerlink" title="2、原因分析"></a>2、原因分析</h4><p> <strong>先从<code>Upload 组件</code>说起</strong></p>
+<p> <code>Upload 组件</code>在文件上传前后都有诸多的回调函数，其中最常用的就是<code>onChange</code>回调函数，它在上传文件状态发生改变时被调用，这个回调函数有一个参数<code>info</code>，值为上传的文件对象，也正是我们需要传到后台的文件对象，如下截图：</p>
+<p> <img src="/images/antDesignUploadFile/15.5.png" alt="avatar"></p>
+<p> 可以清楚看到<code>info</code>这个参数是一个对象，里面也包含两个对象，分别为<code>file</code>和<code>fileList</code>，<code>file</code>是当前最近上传的一个文件对象，<code>fileList</code>是一个数组，包含当前批量或多次上传的多个文件对象。</p>
+<p> 我们发现<code>Upload 组件</code>把文件上传后的各种信息再次封装了一层。（不要以为这句话是废话，这里为后面埋伏笔，或者说成设铺垫。😁）</p>
+<p> 当把<code>fileList</code>这个数组通过以下代码——</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> formData = <span class="keyword">new</span> FormData()</span><br><span class="line">formData.append(<span class="string">'key'</span>, fileList)</span><br></pre></td></tr></table></figure>
+<p> ——添加到<code>formData</code>对象里面后，发现<code>formData</code>对象里面的<code>fileList</code>字段被转换成了<code>&#39;[Object Object]&#39;</code>，无法通过文件流的形式传到后台，这里暂且将这个对象称为<code>一般对象</code>。</p>
+<p><strong>为什么会出现这个问题呢？下面来仔细看看<code>FormData</code>对象</strong></p>
+<p> <code>FormData</code>对象其实是在<code>XMLHttpRequest</code>2级定义的，它是为序列化表以及创建与表单格式相同的数据提供便利，用于XHR传输。</p>
+<p> 再来看一看<code>formData.append(key, values[, filename])</code>方法。</p>
+<p> <code>append()</code>方法会添加一个新值到<code>FormData</code>对象内的一个已存在的键中，如果键不存在，则会添加该键；如果指定的键已经存在，会把新值添加到已有值集合的后面。</p>
+<p><strong>append()方法的参数：</strong></p>
+<ul>
+<li><p><strong>name</strong> - value 中包含的数据对应的表单名称。</p>
+</li>
+<li><p><strong>value</strong> - 表单的值。可以是 USVString 或 Blob (包括子类型，如 File)。</p>
+</li>
+<li><p><strong>filename【可选】</strong> - 传给服务器的文件名称 (一个 USVString), 当一个 Blob 或 File 被作为第二个参数的时候， Blob 对象的默认文件名是 “blob”。 File 对象的默认文件名是该文件的名称。</p>
+</li>
+</ul>
+<h4 id="3、解决方案"><a href="#3、解决方案" class="headerlink" title="3、解决方案"></a>3、解决方案</h4><p> 通过上面<code>value</code>参数的注释，我们能看到它的取值类型为<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/USVString" target="_blank" rel="noopener">USVString</a>或者<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob" target="_blank" rel="noopener">Blob</a></p>
+<p> 而我们刚才取值的<code>file</code>或者<code>fileList</code>都是<code>javascript</code>的‘一般对象’，并非<code>Blob</code>对象，那我们要传给后台的<code>Blob</code>对象到底在哪？</p>
+<p> 通过查阅文档，发现<code>&lt;input type=&#39;file&#39;&gt;</code>的值（<code>File</code>对象）本身就是一个<code>Blob</code>对象，或者说成<code>File</code>对象继承了<code>Blob</code>对象。</p>
+<p> 说到这里，那我们到底该到哪里去获取<code>File</code>对象呢？想必细心的你已经发现了，神秘的它就在<code>Upload 组件</code>的<code>onChange</code>回调函数的返回的参数中，即：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">onchange(info) &#123;</span><br><span class="line">  info.file.originFileObj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 如果还不明白，请看下面的截图：</p>
+<p> <img src="/images/antDesignUploadFile/15.5-2.png" alt="avatar"></p>
+<p> 另外，<code>Upload 组件</code>的官方文档中还有其他的回调函数可以拿到原生的（未经过<code>Upload 组件</code>处理的）<code>File</code>对象，比如<code>beforeUpload</code>，详情见<a href="https://ant.design/components/upload-cn/#API" target="_blank" rel="noopener">官方文档</a></p>
+<p> 总结，我们只需要简单的处理一下<code>Upload 组件</code>的<code>onChange</code>回调函数的返回参数，即可拿到可以封装到<code>FormData</code>中的<code>File</code>对象。</p>
+<h4 id="4、最后来一个温馨提醒"><a href="#4、最后来一个温馨提醒" class="headerlink" title="4、最后来一个温馨提醒"></a>4、最后来一个温馨提醒</h4><ol>
+<li><p>可以使用 FormData 来上传文件，但是必须得在<code>&lt;form&gt;</code>标签上添加属性: enctype=”multipart/form-data”</p>
+</li>
+<li><p>如果使用 XHR 上传表单，记得设置 contentType=false，然后使用第1步的<code>&lt;form&gt;</code>表单。</p>
+<p> <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FormData/Using_FormData_Objects" target="_blank" rel="noopener">更多具体详情请参考FormData文档</a></p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/Ant-Design/" rel="tag"># Ant Design</a>
+          
+            <a href="/tags/File/" rel="tag"># File</a>
+          
+            <a href="/tags/Upload/" rel="tag"># Upload</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="Oceanxy WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="Oceanxy Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/25/react获取ref的值为undefined/" rel="next" title="react获取ref的值为undefined">
+                <i class="fa fa-chevron-left"></i> react获取ref的值为undefined
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/21/jest学习笔记/" rel="prev" title="jest学习笔记">
+                jest学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Oceanxy" />
+          <p class="site-author-name" itemprop="name">Oceanxy</p>
+          <p class="site-description motion-element" itemprop="description">你无法拒绝一个热衷于前端各种美好效果的工程师！</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/oceanxy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、问题描述"><span class="nav-number">1.</span> <span class="nav-text">1、问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、原因分析"><span class="nav-number">2.</span> <span class="nav-text">2、原因分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、解决方案"><span class="nav-number">3.</span> <span class="nav-text">3、解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、最后来一个温馨提醒"><span class="nav-number">4.</span> <span class="nav-text">4、最后来一个温馨提醒</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oceanxy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+<p style="margin-bottom: 0;">Hosted by <a href="https://pages.coding.me" style="font-weight: bold;color: gray;">Coding Pages</a></p>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+      
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2145602"></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("E191g8F5s3UAfy93l0N7fzev-gzGzoHsz", "r9EqhsYlCKLtGQ5A9UWBUE90");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+</body>
+</html>
